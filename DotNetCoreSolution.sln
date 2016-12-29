@@ -13,7 +13,7 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Randy.FrameworkCore", "src\
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Randy.API", "src\Randy.API\Randy.API.xproj", "{C9D2A255-ABB4-4CCF-B492-E8C11E55DB5C}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "test", "test\test.xproj", "{8D027FB9-829D-4CE7-A50C-DAC6AA13AB58}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Randy.Test", "test\Randy.Test.xproj", "{8D027FB9-829D-4CE7-A50C-DAC6AA13AB58}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

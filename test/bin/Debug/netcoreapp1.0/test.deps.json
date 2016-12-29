@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v1.0",
-    "signature": "a82e407354aac10a825f538dbc91fa56f6f1ab15"
+    "signature": "f1a592bca65e55be97c370aa4e2fb5a686ea6549"
   },
   "compilationOptions": {},
   "targets": {
@@ -10,10 +10,27 @@
         "dependencies": {
           "System.Runtime.Serialization.Primitives": "4.1.1",
           "xunit": "2.1.0",
-          "dotnet-test-xunit": "1.0.0-rc2-build10015"
+          "dotnet-test-xunit": "1.0.0-rc2-build10015",
+          "Randy.FrameworkCore": "1.0.0"
         },
         "runtime": {
           "test.dll": {}
+        }
+      },
+      "Autofac/4.2.1": {
+        "runtime": {
+          "lib/netstandard1.1/Autofac.dll": {}
+        }
+      },
+      "Castle.Core/4.0.0-beta002": {
+        "dependencies": {
+          "System.Collections.Specialized": "4.0.1",
+          "System.ComponentModel.TypeConverter": "4.1.0",
+          "System.Diagnostics.TraceSource": "4.0.0",
+          "System.Xml.XmlSerializer": "4.0.11"
+        },
+        "runtime": {
+          "lib/netstandard1.3/Castle.Core.dll": {}
         }
       },
       "dotnet-test-xunit/1.0.0-rc2-build10015": {
@@ -153,9 +170,54 @@
           "lib/netstandard1.0/NuGet.Versioning.dll": {}
         }
       },
+      "System.Collections.NonGeneric/4.0.1": {
+        "runtime": {
+          "lib/netstandard1.3/System.Collections.NonGeneric.dll": {}
+        }
+      },
+      "System.Collections.Specialized/4.0.1": {
+        "dependencies": {
+          "System.Collections.NonGeneric": "4.0.1"
+        },
+        "runtime": {
+          "lib/netstandard1.3/System.Collections.Specialized.dll": {}
+        }
+      },
+      "System.ComponentModel.Primitives/4.1.0": {
+        "runtime": {
+          "lib/netstandard1.0/System.ComponentModel.Primitives.dll": {}
+        }
+      },
+      "System.ComponentModel.TypeConverter/4.1.0": {
+        "dependencies": {
+          "System.Collections.NonGeneric": "4.0.1",
+          "System.Collections.Specialized": "4.0.1",
+          "System.ComponentModel.Primitives": "4.1.0"
+        },
+        "runtime": {
+          "lib/netstandard1.5/System.ComponentModel.TypeConverter.dll": {}
+        }
+      },
+      "System.Diagnostics.TraceSource/4.0.0": {
+        "runtimeTargets": {
+          "runtimes/unix/lib/netstandard1.3/System.Diagnostics.TraceSource.dll": {
+            "rid": "unix",
+            "assetType": "runtime"
+          },
+          "runtimes/win/lib/netstandard1.3/System.Diagnostics.TraceSource.dll": {
+            "rid": "win",
+            "assetType": "runtime"
+          }
+        }
+      },
       "System.Runtime.Serialization.Primitives/4.1.1": {
         "runtime": {
           "lib/netstandard1.3/System.Runtime.Serialization.Primitives.dll": {}
+        }
+      },
+      "System.Xml.XmlSerializer/4.0.11": {
+        "runtime": {
+          "lib/netstandard1.3/System.Xml.XmlSerializer.dll": {}
         }
       },
       "xunit/2.1.0": {
@@ -215,6 +277,15 @@
         "runtime": {
           "lib/dotnet/xunit.runner.utility.dotnet.dll": {}
         }
+      },
+      "Randy.FrameworkCore/1.0.0": {
+        "dependencies": {
+          "Castle.Core": "4.0.0-beta002",
+          "Autofac": "4.2.1"
+        },
+        "runtime": {
+          "Randy.FrameworkCore.dll": {}
+        }
       }
     }
   },
@@ -223,6 +294,16 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "Autofac/4.2.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-mLXJziTZPIt7R6m8SmPIOjMTd4k8Ok9L21j4yFniyA8AogHxEL2XburSwElJLmGU5KsgeMkpuTI22S3GSOeLqQ=="
+    },
+    "Castle.Core/4.0.0-beta002": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-JrHG/4FXsV7+O8h5ytwU17yUzDbnFTrv0KNIVhQMFcSQ1tO1wo+qg6KtEcbqKLCMx/8M0CvEKHUMMH15NKrOOQ=="
     },
     "dotnet-test-xunit/1.0.0-rc2-build10015": {
       "type": "package",
@@ -299,10 +380,40 @@
       "serviceable": true,
       "sha512": "sha512-fwFF9Mck1hgZVDvvJLU81gcaidMksfRoCwyjBALEXxnp1fJr4xLyGbTRdbf2OKI5OODGuUpxaMkcz7P4T8HsXw=="
     },
+    "System.Collections.NonGeneric/4.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-hMxFT2RhhlffyCdKLDXjx8WEC5JfCvNozAZxCablAuFRH74SCV4AgzE8yJCh/73bFnEoZgJ9MJmkjQ0dJmnKqA=="
+    },
+    "System.Collections.Specialized/4.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-/HKQyVP0yH1I0YtK7KJL/28snxHNH/bi+0lgk/+MbURF6ULhAE31MDI+NZDerNWu264YbxklXCCygISgm+HMug=="
+    },
+    "System.ComponentModel.Primitives/4.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-sc/7eVCdxPrp3ljpgTKVaQGUXiW05phNWvtv/m2kocXqrUQvTVWKou1Edas2aDjTThLPZOxPYIGNb/HN0QjURg=="
+    },
+    "System.ComponentModel.TypeConverter/4.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-MnDAlaeJZy9pdB5ZdOlwdxfpI+LJQ6e0hmH7d2+y2LkiD8DRJynyDYl4Xxf3fWFm7SbEwBZh4elcfzONQLOoQw=="
+    },
+    "System.Diagnostics.TraceSource/4.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-6WVCczFZKXwpWpzd/iJkYnsmWTSFFiU24Xx/YdHXBcu+nFI/ehTgeqdJQFbtRPzbrO3KtRNjvkhtj4t5/WwWsA=="
+    },
     "System.Runtime.Serialization.Primitives/4.1.1": {
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-HZ6Du5QrTG8MNJbf4e4qMO3JRAkIboGT5Fk804uZtg3Gq516S7hAqTm2UZKUHa7/6HUGdVy3AqMQKbns06G/cg=="
+    },
+    "System.Xml.XmlSerializer/4.0.11": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-FrazwwqfIXTfq23mfv4zH+BjqkSFNaNFBtjzu3I9NRmG8EELYyrv/fJnttCIwRMFRR/YKXF1hmsMmMEnl55HGw=="
     },
     "xunit/2.1.0": {
       "type": "package",
@@ -343,6 +454,11 @@
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-jJJHROwskIhdQuYw7exe7KaW20dOCa+lzV/lY7Zdh1ZZzdUPpScMi9ReJIutqiyjhemGF8V/GaMIPrcjyZ4ioQ=="
+    },
+    "Randy.FrameworkCore/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     }
   }
 }

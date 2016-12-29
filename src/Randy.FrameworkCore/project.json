@@ -2,6 +2,8 @@
   "version": "1.0.0-*",
 
   "dependencies": {
+    "Castle.Core": "4.0.0-beta002",
+    "Autofac": "4.2.1",
     "NETStandard.Library": "1.6.0"
   },
 

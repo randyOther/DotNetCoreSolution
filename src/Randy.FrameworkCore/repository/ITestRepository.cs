@@ -3,12 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Randy.FrameworkCore
+namespace Randy.FrameworkCore.repository
 {
-    public class Class1
+    public interface ITestRepository : IDependentInjection
     {
-        public Class1()
-        {
-        }
     }
 }
