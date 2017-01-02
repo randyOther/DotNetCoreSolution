@@ -22,40 +22,56 @@ namespace Randy.FrameworkCore.ioc
 
         public IocManager()
         {
+
+            Init();
+        }
+
+        private void Init()
+        {
             _builder = new ContainerBuilder();
             //Register self!
             _builder.RegisterType<IocManager>(DependencyLifeStyleEnum.Singleton);
             _builder.RegisterType<IocManager>(DependencyLifeStyleEnum.Singleton).As<IIocManager>();
 
-            RegisterAssemblyByConvention(Assembly.GetEntryAssembly());
-
-            _container = _builder.Build();
         }
 
         /// <summary>
         /// sacn dll follow convention
         /// </summary>
         /// <param name="assembly">such as from Assembly.GetExecutingAssembly()</param>
-        public void RegisterAssemblyByConvention(Assembly assembly)
+        public void RegisterAssemblyByConvention(string assemblyName)
         {
-            _builder.RegisterAssemblyTypes(assembly); //.Where(s => s.GetInterfaces().Contains(typeof(IDependentInjection)));
-            //_container = _builder.Build();
+            var assembly = Assembly.Load(new AssemblyName(assemblyName));
+            _builder.RegisterAssemblyTypes(assembly).Where(t =>
+            {
+                if (t.IsAssignableTo<IDependentInjection>())
+                    return true;
+                else
+                    return false;
+            });
         }
-
+        /// <summary>
+        /// cann't be working after container builded
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="lifeStyle"></param>
         public void Register(Type type, DependencyLifeStyleEnum lifeStyle = DependencyLifeStyleEnum.Transient)
         {
-            
+
             _builder.RegisterType<IocManager>(lifeStyle);
-            //_container = _builder.Build();
-            
         }
 
+        /// <summary>
+        /// cann't be working after container builded
+        /// </summary>
+        /// <typeparam name="TType"></typeparam>
+        /// <typeparam name="TImpl"></typeparam>
+        /// <param name="lifeStyle"></param>
         public void Register<TType, TImpl>(DependencyLifeStyleEnum lifeStyle = DependencyLifeStyleEnum.Transient)
              where TType : class
             where TImpl : class, TType
         {
             _builder.RegisterType<TImpl>(lifeStyle).As<TType>();
-            //_container = _builder.Build();
         }
 
         public bool IsRegistered(Type type)
@@ -70,12 +86,15 @@ namespace Randy.FrameworkCore.ioc
 
         public object Resolve(Type t)
         {
+            if (_container == null)
+                _container = _builder.Build();
+
             return _container.Resolve(t);
         }
 
         public T Resolve<T>()
         {
-            return (T)_container.Resolve(typeof(T));
+            return (T)Resolve(typeof(T));
         }
 
     }

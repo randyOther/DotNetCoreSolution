@@ -5,6 +5,11 @@ ehthumbs.db
 # Folder config file
 Desktop.ini
 
+src/Randy.API/bin/
+src/Randy.API/obj/
+src/Randy.FrameworkCore/bin/
+src/Randy.FrameworkCore/obj/
+
 # Recycle Bin used on file shares
 $RECYCLE.BIN/
 

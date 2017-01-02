@@ -14,8 +14,10 @@ namespace Tests
 
             var ioc = IocManager.Instance;
 
-            var ff1 = ioc.Resolve(typeof(IIocManager));
-          
+
+            ioc.RegisterAssemblyByConvention("Randy.FrameworkCore");
+
+
             var ff= ioc.Resolve<IocManager>();
 
             var result= ioc.IsRegistered<IocManager>();
@@ -23,16 +25,6 @@ namespace Tests
             result = ioc.IsRegistered<ITestRepository>();
             result = ioc.IsRegistered<TestRepository>();
 
-            ioc.Register<ITestRepository, TestRepository>();
-
-
-            result = ioc.IsRegistered<IocManager>();
-            result = ioc.IsRegistered<IIocManager>();
-            result = ioc.IsRegistered<ITestRepository>();
-            result = ioc.IsRegistered<TestRepository>();
-
-
-            Assert.NotNull(ff1);
             Assert.NotNull(ff);
         }
     }

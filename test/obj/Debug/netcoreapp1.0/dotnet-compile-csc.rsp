@@ -119,3 +119,4 @@
 -r:"C:\Users\randy\.nuget\packages\xunit.runner.utility\2.1.0\lib\dotnet\xunit.runner.utility.dotnet.dll"
 -r:"D:\Developer\DotNetCoreSolution\src\Randy.FrameworkCore\bin\Debug\netstandard1.6\Randy.FrameworkCore.dll"
 "D:\Developer\DotNetCoreSolution\test\FrameworkCoreTest.cs"
+"D:\Developer\DotNetCoreSolution\test\SanRepository.cs"
