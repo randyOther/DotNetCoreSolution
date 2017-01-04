@@ -12,7 +12,7 @@ namespace Randy.FrameworkCore.ioc
     {
         public static IRegistrationBuilder<TImplementer, ConcreteReflectionActivatorData, SingleRegistrationStyle> RegisterType<TImplementer>(this ContainerBuilder builder, DependencyLifeStyleEnum lifeType)
         {
-            var result = Autofac.RegistrationExtensions.RegisterType<TImplementer>(builder);
+            var result = Autofac.RegistrationExtensions.RegisterType<TImplementer>(builder).PropertiesAutowired();
             switch (lifeType)
             {
                 case DependencyLifeStyleEnum.Transient:

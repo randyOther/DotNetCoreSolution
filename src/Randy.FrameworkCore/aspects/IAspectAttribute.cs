@@ -8,4 +8,8 @@ namespace Randy.FrameworkCore.aspects
     public interface IAspectAttribute 
     {
     }
+
+
+    //public class LogInterceptor : IInterceptor
+
 }

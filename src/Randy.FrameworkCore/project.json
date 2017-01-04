@@ -5,6 +5,7 @@
     "Castle.Core": "4.0.0-beta002",
     "Autofac": "4.2.1",
     "NETStandard.Library": "1.6.0"
+    //"Autofac.Extras.DynamicProxy2": "3.0.7"
   },
 
   "frameworks": {

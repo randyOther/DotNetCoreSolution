@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using Randy.FrameworkCore.repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,11 +21,7 @@ namespace Randy.FrameworkCore.ioc
             Instance = new ioc.IocManager();
         }
 
-        public IocManager()
-        {
-
-            Init();
-        }
+        public IocManager() { Init(); }
 
         private void Init()
         {
@@ -48,17 +45,23 @@ namespace Randy.FrameworkCore.ioc
                     return true;
                 else
                     return false;
-            });
+            }).AsSelf().As(a =>
+            {
+                var clsLastName = a.FullName.Split(new char[] { '.' }, StringSplitOptions.RemoveEmptyEntries).LastOrDefault();
+                var result = a.GetInterfaces().FirstOrDefault(f =>
+                                              f.FullName != typeof(IDependentInjection).FullName
+                                              && f.FullName.Split(new char[] { '.' }, StringSplitOptions.RemoveEmptyEntries).LastOrDefault().Contains(clsLastName));
+                return result;
+            }).PropertiesAutowired();
         }
         /// <summary>
         /// cann't be working after container builded
         /// </summary>
         /// <param name="type"></param>
         /// <param name="lifeStyle"></param>
-        public void Register(Type type, DependencyLifeStyleEnum lifeStyle = DependencyLifeStyleEnum.Transient)
+        public void Register<T>(DependencyLifeStyleEnum lifeStyle = DependencyLifeStyleEnum.Transient)
         {
-
-            _builder.RegisterType<IocManager>(lifeStyle);
+            _builder.RegisterType<T>(lifeStyle);
         }
 
         /// <summary>
@@ -71,7 +74,7 @@ namespace Randy.FrameworkCore.ioc
              where TType : class
             where TImpl : class, TType
         {
-            _builder.RegisterType<TImpl>(lifeStyle).As<TType>();
+            _builder.RegisterType<TImpl>(lifeStyle).AsSelf().As<TType>();
         }
 
         public bool IsRegistered(Type type)
