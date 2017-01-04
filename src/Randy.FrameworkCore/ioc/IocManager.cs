@@ -45,13 +45,10 @@ namespace Randy.FrameworkCore.ioc
                     return true;
                 else
                     return false;
-            }).AsSelf().As(a =>
-            {
+            }).AsSelf().As(a =>{
                 var clsLastName = a.FullName.Split(new char[] { '.' }, StringSplitOptions.RemoveEmptyEntries).LastOrDefault();
-                var result = a.GetInterfaces().FirstOrDefault(f =>
-                                              f.FullName != typeof(IDependentInjection).FullName
-                                              && f.FullName.Split(new char[] { '.' }, StringSplitOptions.RemoveEmptyEntries).LastOrDefault().Contains(clsLastName));
-                return result;
+                var result = a.GetInterfaces().FirstOrDefault(f =>f.FullName.Split(new char[] { '.' }, StringSplitOptions.RemoveEmptyEntries).LastOrDefault().Contains(clsLastName));
+                return result ?? typeof(IDependentInjection);
             }).PropertiesAutowired();
         }
         /// <summary>

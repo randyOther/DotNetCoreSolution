@@ -25,5 +25,12 @@ namespace Randy.FrameworkCore.ioc
                     return result.InstancePerDependency();
             }
         }
+
+
+
+
+
+
+
     }
 }

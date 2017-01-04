@@ -30,6 +30,9 @@ namespace Tests
             result = ioc.IsRegistered<ITestRepository>();
             result = ioc.IsRegistered<TestRepository>();
 
+            var test = ioc.Resolve<ITestRepository>();
+            test.GetTest();
+
             Assert.NotNull(ff);
         }
     }

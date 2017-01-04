@@ -5,7 +5,8 @@ using System.Threading.Tasks;
 
 namespace Randy.FrameworkCore.repository
 {
-    public interface ITestRepository : IDependentInjection
+    public interface ITestRepository 
     {
+        void GetTest();
     }
 }

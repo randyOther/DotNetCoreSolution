@@ -5,7 +5,12 @@ using System.Threading.Tasks;
 
 namespace Randy.FrameworkCore.repository
 {
-    public class NoneRepository 
+    public class NoneRepository : IDependentInjection
     {
+        public void Test()
+        {
+            Console.WriteLine("Hello  Test");
+        }
+
     }
 }
