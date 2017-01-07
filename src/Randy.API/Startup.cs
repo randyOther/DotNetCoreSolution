@@ -7,11 +7,11 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Randy.FrameworkCore.ioc;
-using Autofac.Extensions.DependencyInjection;
 using Randy.FrameworkCore;
+using Microsoft.Extensions.PlatformAbstractions;
+using Swashbuckle.Swagger.Model;
 
-namespace Randy.API
+namespace Randy.Api
 {
     public class Startup
     {
@@ -34,6 +34,26 @@ namespace Randy.API
             services.AddMvc();
 
 
+            services.AddSwaggerGen();
+            services.ConfigureSwaggerGen(options =>
+            {
+                options.SingleApiVersion(new Info
+                {
+                    Version = "v1",
+                    Title = "Demo API",
+                    Description = "A simple example ASP.NET Core Web API",
+                    //TermsOfService = "None",
+                    //Contact = new Contact { Name = "Randy Lai", Email = "", Url = "http://twitter.com/spboyer" },
+                    //License = new License { Name = "Use under LICX", Url = "http://randy.com" }
+                });
+
+                //Determine base path for the application.
+                var basePath = PlatformServices.Default.Application.ApplicationBasePath;
+
+                //Set the comments path for the swagger json and ui.
+                options.IncludeXmlComments(basePath + "\\Randy.Api.xml");
+            });
+
             return FrameworkStartup.GetAutofacProvider(services);
         }
 
@@ -43,24 +63,11 @@ namespace Randy.API
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-                app.UseBrowserLink();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
-            }
-
-            app.UseStaticFiles();
-
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-            });
+            //use template swagger didnot work
+            app.UseMvc();
+        
+            app.UseSwagger();
+            app.UseSwaggerUi();
         }
-    }
+}
 }
