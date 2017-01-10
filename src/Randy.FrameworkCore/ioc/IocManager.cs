@@ -1,11 +1,13 @@
 ﻿using Autofac;
+using Castle.DynamicProxy;
+using Randy.FrameworkCore.aspects;
 using System;
 using System.Linq;
 using System.Reflection;
 
 namespace Randy.FrameworkCore.ioc
 {
-    public class IocManager : IIocManager
+    public sealed class IocManager 
     {
 
         public static IocManager Instance { get; private set; }
@@ -25,34 +27,64 @@ namespace Randy.FrameworkCore.ioc
             _builder = new ContainerBuilder();
             //Register self!
             _builder.RegisterType<IocManager>(DependencyLifeStyleEnum.Singleton);
-            _builder.RegisterType<IocManager>(DependencyLifeStyleEnum.Singleton).As<IIocManager>();
-
         }
 
         /// <summary>
         /// sacn dll follow convention
         /// </summary>
-        /// <param name="assembly">such as from Assembly.GetExecutingAssembly()</param>
+        /// <param name="assembly">assembly</param>
         public void RegisterAssemblyByConvention(string assemblyName)
         {
             var assembly = Assembly.Load(new AssemblyName(assemblyName));
             RegisterAssemblyByConvention(assembly);
         }
 
+
         public void RegisterAssemblyByConvention(Assembly assembly)
         {
-            _builder.RegisterAssemblyTypes(assembly).Where(t =>
+            var types = assembly.GetTypes();
+            if (types != null && types.Count() > 0)
             {
-                if (t.IsAssignableTo<IDependentInjection>())
-                    return true;
+                foreach (var type in types)
+                {
+                    if (typeof(IDependentInjection).IsAssignableFrom(type) && !type.GetTypeInfo().IsAbstract)
+                    {
+                        RegisterTypeWithAspect(type);
+                    }
+                }
+            }
+
+        }
+
+        private void RegisterTypeWithAspect(Type type,DependencyLifeStyleEnum lifeStyle = DependencyLifeStyleEnum.Transient)
+        {
+            if (typeof(IDependentInjection).IsAssignableFrom(type) && !type.GetTypeInfo().IsAbstract)
+            {
+                var attribute = type.GetTypeInfo().GetCustomAttributes();
+
+                if (attribute.Count() == 0)
+                {
+                    _builder.RegisterType(type,lifeStyle).AsImplementedInterfaces().PropertiesAutowired();
+                    //_builder.RegisterType(type).AsImplementedInterfaces().PropertiesAutowired();
+                }
                 else
-                    return false;
-            }).AsSelf().As(a =>
-            {
-                var clsLastName = a.FullName.Split(new char[] { '.' }, StringSplitOptions.RemoveEmptyEntries).LastOrDefault();
-                var result = a.GetInterfaces().FirstOrDefault(f => f.FullName.Split(new char[] { '.' }, StringSplitOptions.RemoveEmptyEntries).LastOrDefault().Contains(clsLastName));
-                return result ?? typeof(IDependentInjection);
-            }).PropertiesAutowired();
+                {
+
+                    var interceptTypes = attribute.Where(s => typeof(IInterceptor).IsAssignableFrom(s.GetType()) && typeof(Attribute).IsAssignableFrom(s.GetType())).Select(s => s.GetType());
+
+                    //register attribute
+                    if (interceptTypes != null && interceptTypes.Count() > 0)
+                    {
+                        _builder.RegisterTypes(interceptTypes.ToArray());
+
+                        //register type if contains aop attribute
+                        _builder.RegisterType(type, lifeStyle).AsImplementedInterfaces().EnableInterfaceInterceptors()
+                                .InterceptedBy(interceptTypes.ToArray()).PropertiesAutowired();  
+
+                    }
+                }
+            }
+
         }
 
 
@@ -63,29 +95,23 @@ namespace Randy.FrameworkCore.ioc
         /// <param name="lifeStyle"></param>
         public void Register<T>(DependencyLifeStyleEnum lifeStyle = DependencyLifeStyleEnum.Transient)
         {
-            _builder.RegisterType<T>(lifeStyle);
+            RegisterTypeWithAspect(typeof(T),lifeStyle);
         }
 
-        /// <summary>
-        /// cann't be working after container builded
-        /// </summary>
-        /// <typeparam name="TType"></typeparam>
-        /// <typeparam name="TImpl"></typeparam>
-        /// <param name="lifeStyle"></param>
-        public void Register<TType, TImpl>(DependencyLifeStyleEnum lifeStyle = DependencyLifeStyleEnum.Transient)
-             where TType : class
-            where TImpl : class, TType
-        {
-            _builder.RegisterType<TImpl>(lifeStyle).AsSelf().As<TType>();
-        }
 
         public bool IsRegistered(Type type)
         {
+            if (_container == null)
+                _container = _builder.Build();
+
             return _container.IsRegistered(type);
         }
 
         public bool IsRegistered<T>()
         {
+            if (_container == null)
+                _container = _builder.Build();
+
             return _container.IsRegistered(typeof(T));
         }
 

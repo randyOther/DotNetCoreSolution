@@ -25,6 +25,7 @@ namespace Randy.FrameworkCore
         /// <returns></returns>
         public static IServiceProvider GetAutofacProvider(IServiceCollection populateService)
         {
+
             IocManager.Instance.RegisterAssemblyByConvention(typeof(IocManager).GetTypeInfo().Assembly);
 
             IocManager.Instance.GetBuilder().Populate(populateService);

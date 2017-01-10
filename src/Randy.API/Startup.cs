@@ -10,6 +10,10 @@ using Microsoft.Extensions.Logging;
 using Randy.FrameworkCore;
 using Microsoft.Extensions.PlatformAbstractions;
 using Swashbuckle.Swagger.Model;
+using Microsoft.AspNetCore.Mvc.ApplicationParts;
+using System.Reflection;
+using Microsoft.AspNetCore.Mvc.Controllers;
+using Randy.FrameworkCore.ioc;
 
 namespace Randy.Api
 {
@@ -41,18 +45,19 @@ namespace Randy.Api
                 {
                     Version = "v1",
                     Title = "Demo API",
-                    Description = "A simple example ASP.NET Core Web API",
-                    //TermsOfService = "None",
-                    //Contact = new Contact { Name = "Randy Lai", Email = "", Url = "http://twitter.com/spboyer" },
-                    //License = new License { Name = "Use under LICX", Url = "http://randy.com" }
+                    Description = "RESTful for ASP.NET Core",
                 });
-
-                //Determine base path for the application.
                 var basePath = PlatformServices.Default.Application.ApplicationBasePath;
-
-                //Set the comments path for the swagger json and ui.
                 options.IncludeXmlComments(basePath + "\\Randy.Api.xml");
             });
+
+
+            ////inject controller  ? 
+            //var manager = new ApplicationPartManager();
+            //manager.ApplicationParts.Add(new AssemblyPart(this.GetType().GetTypeInfo().Assembly));
+            //manager.FeatureProviders.Add(new ControllerFeatureProvider());
+            //IocManager.Instance.RegisterType<ApplicationPartManager>().AsSelf().SingleInstance();
+            //IocManager.Instance.RegisterTypes(feature.Controllers.Select(ti => ti.AsType()).ToArray()).PropertiesAutowired();
 
             return FrameworkStartup.GetAutofacProvider(services);
         }
