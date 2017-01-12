@@ -1,11 +1,12 @@
-﻿{
+{
   "version": "1.0.0-*",
 
   "dependencies": {
     "Castle.Core": "4.0.0-beta002",
     "Autofac": "4.2.1",
-    "NETStandard.Library": "1.6.0"
-    //"Autofac.Extras.DynamicProxy2": "3.0.7"
+    "NETStandard.Library": "1.6.0",
+    "Autofac.Extensions.DependencyInjection": "4.0.0",
+    "log4net": "2.0.7"
   },
 
   "frameworks": {

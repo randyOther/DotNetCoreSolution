@@ -1,5 +1,5 @@
 #:D:\Developer\DotNetCoreSolution\src\Randy.FrameworkCore\Randy.FrameworkCore.xproj
-#:D:\Developer\DotNetCoreSolution\test\Randy.Test.xproj
-D:\Developer\DotNetCoreSolution\test\Randy.Test.xproj|D:\Developer\DotNetCoreSolution\src\Randy.FrameworkCore\Randy.FrameworkCore.xproj
 #:D:\Developer\DotNetCoreSolution\src\Randy.API\Randy.API.xproj
 D:\Developer\DotNetCoreSolution\src\Randy.API\Randy.API.xproj|D:\Developer\DotNetCoreSolution\src\Randy.FrameworkCore\Randy.FrameworkCore.xproj
+#:D:\Developer\DotNetCoreSolution\test\Randy.Test.xproj
+D:\Developer\DotNetCoreSolution\test\Randy.Test.xproj|D:\Developer\DotNetCoreSolution\src\Randy.FrameworkCore\Randy.FrameworkCore.xproj

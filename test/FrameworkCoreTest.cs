@@ -1,7 +1,6 @@
 ﻿using Randy.FrameworkCore;
 using Randy.FrameworkCore.ioc;
-using Randy.FrameworkCore.repository;
-using System;
+using Randy.FrameworkCore.log4net;
 using System.Reflection;
 using Xunit;
 
@@ -12,8 +11,8 @@ namespace Tests
 
         public FrameworkCoreTest()
         {
-            //var assembly = this.GetType().GetTypeInfo().Assembly;
-            IocManager.Instance.RegisterAssemblyByConvention("Randy.FrameworkCore");
+            var assembly = typeof(IocManager).GetTypeInfo().Assembly;
+            IocManager.Instance.RegisterAssemblyByConvention(typeof(IocManager).GetTypeInfo().Assembly);
           
         }
 
@@ -23,17 +22,29 @@ namespace Tests
 
             var ioc = IocManager.Instance;
 
-            var ff = ioc.Resolve<IocManager>();
+            var manager = ioc.Resolve<IocManager>();
        
             var result = ioc.IsRegistered<IocManager>();
             result = ioc.IsRegistered<IIocManager>();
-            result = ioc.IsRegistered<ITestRepository>();
-            result = ioc.IsRegistered<TestRepository>();
+            result = ioc.IsRegistered<ILogWrap>();
+            result = ioc.IsRegistered<LogWrap>();
 
-            var test = ioc.Resolve<ITestRepository>();
-            test.GetTest();
+            Assert.True(result);
+            Assert.NotNull(manager);
+        }
 
-            Assert.NotNull(ff);
+
+        [Fact]
+        public void LogTest()
+        {
+            var log = IocManager.Instance.Resolve<ILogWrap>();
+
+            for (int i = 0; i < 10; i++) {
+                log.Write(@"远处的山，是一座芳草青青的山；远处的山，是一座碧绿无茵的山；远处的山，是一座枝叶繁茂的山；远处的山，是我平生所见最壮丽的山。", LogEnumType.Error);
+            }
+          
+            //log.Write("test error",LogEnumType.Error);
+
         }
     }
 }

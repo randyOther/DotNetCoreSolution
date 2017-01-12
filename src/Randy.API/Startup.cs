@@ -8,7 +8,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Randy.FrameworkCore.ioc;
-using Randy.FrameworkCore.repository;
+using Autofac.Extensions.DependencyInjection;
+using Randy.FrameworkCore;
 
 namespace Randy.API
 {
@@ -27,12 +28,13 @@ namespace Randy.API
         public IConfigurationRoot Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
             services.AddMvc();
 
 
+            return FrameworkStartup.GetAutofacProvider(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

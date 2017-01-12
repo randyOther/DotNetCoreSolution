@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Randy.FrameworkCore.repository
+namespace Randy.DomainCore
 {
-    public interface ITestRepository 
+    public class Class1
     {
-        void GetTest();
+        public Class1()
+        {
+        }
     }
 }

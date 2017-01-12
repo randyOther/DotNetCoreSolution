@@ -1,10 +1,7 @@
 ﻿using Autofac;
-using Randy.FrameworkCore.repository;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 
 namespace Randy.FrameworkCore.ioc
 {
@@ -39,18 +36,26 @@ namespace Randy.FrameworkCore.ioc
         public void RegisterAssemblyByConvention(string assemblyName)
         {
             var assembly = Assembly.Load(new AssemblyName(assemblyName));
+            RegisterAssemblyByConvention(assembly);
+        }
+
+        public void RegisterAssemblyByConvention(Assembly assembly)
+        {
             _builder.RegisterAssemblyTypes(assembly).Where(t =>
             {
                 if (t.IsAssignableTo<IDependentInjection>())
                     return true;
                 else
                     return false;
-            }).AsSelf().As(a =>{
+            }).AsSelf().As(a =>
+            {
                 var clsLastName = a.FullName.Split(new char[] { '.' }, StringSplitOptions.RemoveEmptyEntries).LastOrDefault();
-                var result = a.GetInterfaces().FirstOrDefault(f =>f.FullName.Split(new char[] { '.' }, StringSplitOptions.RemoveEmptyEntries).LastOrDefault().Contains(clsLastName));
+                var result = a.GetInterfaces().FirstOrDefault(f => f.FullName.Split(new char[] { '.' }, StringSplitOptions.RemoveEmptyEntries).LastOrDefault().Contains(clsLastName));
                 return result ?? typeof(IDependentInjection);
             }).PropertiesAutowired();
         }
+
+
         /// <summary>
         /// cann't be working after container builded
         /// </summary>
@@ -95,6 +100,19 @@ namespace Randy.FrameworkCore.ioc
         public T Resolve<T>()
         {
             return (T)Resolve(typeof(T));
+        }
+
+        public IContainer GetContanier()
+        {
+            if (_container == null)
+                _container = _builder.Build();
+
+            return _container;
+        }
+
+        public ContainerBuilder GetBuilder()
+        {
+            return _builder;
         }
 
     }
