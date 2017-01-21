@@ -2,6 +2,7 @@
 using Randy.FrameworkCore.aspects;
 using Randy.FrameworkCore.ioc;
 using Randy.FrameworkCore.log4net;
+using Randy.FrameworkCore.reposiories;
 using System.Reflection;
 using test.TestModels;
 using Xunit;
@@ -25,17 +26,17 @@ namespace Tests
             var ioc = IocManager.Instance;
 
             var manager = ioc.Resolve<IocManager>();
-       
+
             var result = ioc.IsRegistered<IocManager>();
 
             //return false
             result = ioc.IsRegistered<LogWrap>();
-            result = ioc.IsRegistered<Repository>();
+            result = ioc.IsRegistered<TestAopinterfce>();
             Assert.False(result);
 
             //return true
             result = ioc.IsRegistered<ILogWrap>();
-            result = ioc.IsRegistered<IRepository>();
+            result = ioc.IsRegistered<ITestAopinterfce>();
 
             Assert.True(result);
             Assert.NotNull(manager);
@@ -47,10 +48,11 @@ namespace Tests
         {
             var log = IocManager.Instance.Resolve<ILogWrap>();
 
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < 10; i++)
+            {
                 log.Write(@"远处的山，是一座芳草青青的山；远处的山，是一座碧绿无茵的山；远处的山，是一座枝叶繁茂的山；远处的山，是我平生所见最壮丽的山。", LogEnumType.Error);
             }
-          
+
             //log.Write("test error",LogEnumType.Error);
 
         }
@@ -61,10 +63,32 @@ namespace Tests
         {
             var ioc = IocManager.Instance;
 
-            var repository= ioc.Resolve<IRepository>();
+            var repository = ioc.Resolve<ITestAopinterfce>();
             repository.Add();
 
             Assert.NotNull(repository);
+        }
+
+
+        [Fact]
+        public void DbContextTest()
+        {
+            var f = IocManager.Instance.IsRegistered<IRepository<Randy.FrameworkCore.reposiories.test>>();
+
+            var repositories = IocManager.Instance.Resolve<IRepository<Randy.FrameworkCore.reposiories.test>>();
+
+            var all = repositories.GetAllList();
+       
+            var all1 = repositories.GetAllByPaged(1,1);
+            var all2 = repositories.GetAllByPaged(2, 1);
+
+            var test = repositories.Insert(new Randy.FrameworkCore.reposiories.test { Name = "randy", Phone = "111" });
+            //repositories.Commit();
+
+            Assert.NotNull(test);
+            Assert.True(test.Id > 0);
+            //var repositories = IocManager.Instance.Resolve<IRepository<A>>();
+
         }
     }
 }

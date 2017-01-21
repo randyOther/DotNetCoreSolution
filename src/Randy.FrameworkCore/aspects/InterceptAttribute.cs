@@ -1,11 +1,6 @@
-﻿//using PostSharp.Aspects;
-//using PostSharp.Serialization;
-using Autofac.Core;
+﻿using Autofac.Core;
 using Castle.DynamicProxy;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Randy.FrameworkCore.aspects
 {

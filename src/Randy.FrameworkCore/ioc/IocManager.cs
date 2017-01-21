@@ -7,7 +7,7 @@ using System.Reflection;
 
 namespace Randy.FrameworkCore.ioc
 {
-    public sealed class IocManager 
+    public sealed class IocManager
     {
 
         public static IocManager Instance { get; private set; }
@@ -56,21 +56,30 @@ namespace Randy.FrameworkCore.ioc
 
         }
 
-        private void RegisterTypeWithAspect(Type type,DependencyLifeStyleEnum lifeStyle = DependencyLifeStyleEnum.Transient)
+        private void RegisterTypeWithAspect(Type type, DependencyLifeStyleEnum lifeStyle = DependencyLifeStyleEnum.Transient)
         {
             if (typeof(IDependentInjection).IsAssignableFrom(type) && !type.GetTypeInfo().IsAbstract)
             {
                 var attribute = type.GetTypeInfo().GetCustomAttributes();
+                var isGenericType = type.GetTypeInfo().IsGenericType;
 
                 if (attribute.Count() == 0)
                 {
-                    _builder.RegisterType(type,lifeStyle).AsImplementedInterfaces().PropertiesAutowired();
-                    //_builder.RegisterType(type).AsImplementedInterfaces().PropertiesAutowired();
+                    if (isGenericType)
+                    {
+                        _builder.RegisterGeneric(type, lifeStyle)
+                            .As(type.GetInterfaces().FirstOrDefault(t => typeof(IDependentInjection) != t)).PropertiesAutowired();
+                    }
+                    else
+                    {
+                        _builder.RegisterType(type, lifeStyle).AsImplementedInterfaces().PropertiesAutowired();
+                    }
                 }
                 else
                 {
 
-                    var interceptTypes = attribute.Where(s => typeof(IInterceptor).IsAssignableFrom(s.GetType()) && typeof(Attribute).IsAssignableFrom(s.GetType())).Select(s => s.GetType());
+                    var interceptTypes = attribute.Where(s => typeof(IInterceptor).IsAssignableFrom(s.GetType()) 
+                        && typeof(Attribute).IsAssignableFrom(s.GetType())).Select(s => s.GetType());
 
                     //register attribute
                     if (interceptTypes != null && interceptTypes.Count() > 0)
@@ -78,8 +87,17 @@ namespace Randy.FrameworkCore.ioc
                         _builder.RegisterTypes(interceptTypes.ToArray());
 
                         //register type if contains aop attribute
-                        _builder.RegisterType(type, lifeStyle).AsImplementedInterfaces().EnableInterfaceInterceptors()
-                                .InterceptedBy(interceptTypes.ToArray()).PropertiesAutowired();  
+                        if (isGenericType)
+                        {
+                            _builder.RegisterGeneric(type, lifeStyle)
+                                .As(type.GetInterfaces().FirstOrDefault(t => typeof(IDependentInjection) != t))
+                                .EnableInterfaceInterceptors().InterceptedBy(interceptTypes.ToArray()).PropertiesAutowired();
+                        }
+                        else
+                        {
+                            _builder.RegisterType(type, lifeStyle).AsImplementedInterfaces().EnableInterfaceInterceptors()
+                                    .InterceptedBy(interceptTypes.ToArray()).PropertiesAutowired();
+                        }
 
                     }
                 }
@@ -95,7 +113,7 @@ namespace Randy.FrameworkCore.ioc
         /// <param name="lifeStyle"></param>
         public void Register<T>(DependencyLifeStyleEnum lifeStyle = DependencyLifeStyleEnum.Transient)
         {
-            RegisterTypeWithAspect(typeof(T),lifeStyle);
+            RegisterTypeWithAspect(typeof(T), lifeStyle);
         }
 
 

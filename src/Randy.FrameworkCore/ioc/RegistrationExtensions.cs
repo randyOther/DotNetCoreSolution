@@ -50,6 +50,23 @@ namespace Randy.FrameworkCore.ioc
         }
 
 
+        public static IRegistrationBuilder<object, ReflectionActivatorData, DynamicRegistrationStyle> RegisterGeneric(this ContainerBuilder builder, Type implementer, DependencyLifeStyleEnum lifeType)
+        {
+            var result = Autofac.RegistrationExtensions.RegisterGeneric(builder, implementer).PropertiesAutowired();
+            switch (lifeType)
+            {
+                case DependencyLifeStyleEnum.Transient:
+                    return result.InstancePerDependency();
+
+                case DependencyLifeStyleEnum.Singleton:
+                    return result.SingleInstance();
+
+                default:
+                    return result.InstancePerDependency();
+            }
+        }
+
+
         private const string InterceptorsPropertyName = "Autofac.Extras.DynamicProxy.RegistrationExtensions.InterceptorsPropertyName";
 
         private static readonly IEnumerable<Service> EmptyServices = new Service[0];

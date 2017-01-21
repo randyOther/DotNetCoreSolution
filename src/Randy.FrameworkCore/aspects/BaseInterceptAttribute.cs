@@ -19,37 +19,4 @@ namespace Randy.FrameworkCore.aspects
         public abstract void OnExcuted(IInvocation invocation);
     }
 
-
-    public class AopTestInterceptorAttribute : BaseInterceptAttribute
-    {
-
-        public override void OnEntry(IInvocation invocation)
-        {
-            Console.WriteLine("AopTestInterceptorAttribute before");
-        }
-
-        public override void OnExcuted(IInvocation invocation)
-        {
-            Console.WriteLine("AopTestInterceptorAttribute after");
-        }
-    }
-
-    public class LogTestInterceptorAttribute : BaseInterceptAttribute
-    {
-
-        public override void OnEntry(IInvocation invocation)
-         {
-            Console.WriteLine(" LogTestInterceptor before");
-        }
-
-        public override void OnExcuted(IInvocation invocation)
-        {
-            Console.WriteLine("LogTestInterceptor after");
-        }
-
-    }
-
-
-
-
 }

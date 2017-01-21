@@ -43,7 +43,7 @@ namespace Randy.Api
             {
                 options.SingleApiVersion(new Info
                 {
-                    Version = "v1",
+                    Version = "Version 1.0",
                     Title = "Demo API",
                     Description = "RESTful for ASP.NET Core",
                 });

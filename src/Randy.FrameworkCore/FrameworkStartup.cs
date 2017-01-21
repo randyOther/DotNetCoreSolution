@@ -12,12 +12,19 @@ namespace Randy.FrameworkCore
     public class FrameworkStartup
     {
 
+
         public static void InitFramework()
         {
-            IocManager.Instance.RegisterAssemblyByConvention(typeof(IocManager).GetTypeInfo().Assembly);
+            InitFramework((container) => {});
         }
 
+        public static void InitFramework(Action<IocManager> action)
+        {
+            IocManager.Instance.RegisterAssemblyByConvention(typeof(IocManager).GetTypeInfo().Assembly);
+            action(IocManager.Instance);
+        }
 
+     
         /// <summary>
         /// for replace the asp.net core default ioc contaniner
         /// </summary>
@@ -25,9 +32,7 @@ namespace Randy.FrameworkCore
         /// <returns></returns>
         public static IServiceProvider GetAutofacProvider(IServiceCollection populateService)
         {
-
-            IocManager.Instance.RegisterAssemblyByConvention(typeof(IocManager).GetTypeInfo().Assembly);
-
+            InitFramework();
             IocManager.Instance.GetBuilder().Populate(populateService);
             return new AutofacServiceProvider(IocManager.Instance.GetContanier());
         }
