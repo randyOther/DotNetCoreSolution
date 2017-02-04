@@ -25,7 +25,10 @@ namespace Randy.FrameworkCore.reposiories
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySQL(@"Server=192.168.0.102;database=usersystem;uid=root;pwd=12345678");// 
+            //home
+            // optionsBuilder.UseMySQL(@"Server=192.168.0.102;database=usersystem;uid=root;pwd=12345678");
+            optionsBuilder.UseMySQL(@"Server=192.168.10.163;database=usersystem;uid=root;pwd=12345678");
+
         }
 
 
@@ -34,18 +37,7 @@ namespace Randy.FrameworkCore.reposiories
     }
 
 
-    public class UnitofWorkDbProvider : IDbContextProvider,IDependentInjection
-    {
-        private DbContext _dbcontext;
-        public DbContext GetDbContext()
-        {
-            if (_dbcontext == null)
-                _dbcontext = new MysqlDbContext();
 
-            return _dbcontext;
-        }
-
-    }
 
     //注意linux下区分大小写
     public class test
