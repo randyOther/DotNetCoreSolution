@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Castle.DynamicProxy;
+using Randy.FrameworkCore.ioc;
+using Randy.FrameworkCore.log4net;
 
 namespace Randy.FrameworkCore.aspects
 {
@@ -13,9 +15,18 @@ namespace Randy.FrameworkCore.aspects
     {
         public void Intercept(IInvocation invocation)
         {
-            OnEntry(invocation);
-            invocation.Proceed();
-            OnExcuted(invocation);
+            try
+            {
+                OnEntry(invocation);
+                invocation.Proceed();
+                OnExcuted(invocation);
+            }
+            catch (Exception ex)
+            {
+                var log = IocManager.Instance.Resolve<ILogWrap>();
+                log.Write("core framework catch exception",LogEnumType.Error, ex);
+                Console.WriteLine(ex.Message);
+            }
         }
 
         public abstract void OnEntry(IInvocation invocation);

@@ -15,7 +15,7 @@ namespace Randy.FrameworkCore.log4net
         }
 
 
-        public void Write(string message, LogEnumType logType)
+        public void Write(string message, LogEnumType logType,Exception exp=null)
         {
             Task.Run(() =>
             {
@@ -25,7 +25,7 @@ namespace Randy.FrameworkCore.log4net
 
                     if (logType == LogEnumType.Error)
                     {
-                        logger.Error(message);
+                        logger.Error(message, exp);
                     }
                     else
                     {

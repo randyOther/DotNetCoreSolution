@@ -12,7 +12,7 @@ namespace Randy.FrameworkCore.log4net
         /// </summary>
         /// <param name="message">message</param>
         /// <param name="logType">info or error</param>
-        void Write(string message, LogEnumType logType = LogEnumType.Info);
+        void Write(string message, LogEnumType logType = LogEnumType.Info, Exception exp = null);
 
         /// <summary>
         ///  write log by format message

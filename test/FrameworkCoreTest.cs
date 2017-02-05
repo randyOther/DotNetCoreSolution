@@ -102,7 +102,7 @@ namespace Tests
         }
 
         [Fact]
-        public void ServicesTest()
+        public void UniofWorkServicesTest()
         {
             var ioc = IocManager.Instance;
 
@@ -110,8 +110,30 @@ namespace Tests
 
             testService.Test();
 
-
-            
         }
+
+        [Fact]
+        public void EventBusTest()
+        {
+            var ioc = IocManager.Instance;
+
+
+        }
+
+
+
+        [Fact]
+        public void ConfigrationTest()
+        {
+            var value= ConfigurationManager.GetConfigValue("connectionStrings");
+            var value1 = ConfigurationManager.GetConfigSection("system");
+            var ff= value1["a"];
+
+            Assert.NotNull(value);
+            Assert.NotEmpty(value);
+
+        }
+
+
     }
 }

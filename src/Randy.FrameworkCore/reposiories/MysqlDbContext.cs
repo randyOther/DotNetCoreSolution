@@ -13,30 +13,23 @@ namespace Randy.FrameworkCore.reposiories
     /// </summary>
     public partial class MysqlDbContext : DbContext
     {
-        private string _connectionString = string.Empty;
+        private string _connectionString = @"Server=192.168.0.102;database=usersystem;uid=root;pwd=12345678";
 
 
         public MysqlDbContext() { }
 
-        public MysqlDbContext(string connectStr)
-        {
-            _connectionString = connectStr;
-        }
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            _connectionString = ConfigurationManager.GetConfigValue("connectionStrings");
             //home
-             optionsBuilder.UseMySQL(@"Server=192.168.0.102;database=usersystem;uid=root;pwd=12345678");
-           //optionsBuilder.UseMySQL(@"Server=192.168.10.163;database=usersystem;uid=root;pwd=12345678");
-
+            optionsBuilder.UseMySQL(_connectionString);
+            //optionsBuilder.UseMySQL(@"Server=192.168.10.163;database=usersystem;uid=root;pwd=12345678");
         }
 
 
         public DbSet<test> Test { get; set; }
 
     }
-
-
 
 
     //注意linux下区分大小写
