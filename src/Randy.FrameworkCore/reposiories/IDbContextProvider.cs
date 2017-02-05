@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Randy.FrameworkCore.reposiories
 {
-    public interface IDbContextProvider  //idepnce
+    public interface IDbContextProvider 
     {
         DbContext GetDbContext();
     }

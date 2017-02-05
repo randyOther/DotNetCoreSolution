@@ -1,4 +1,5 @@
-﻿using Randy.FrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using Randy.FrameworkCore;
 using Randy.FrameworkCore.aspects;
 using Randy.FrameworkCore.ioc;
 using Randy.FrameworkCore.log4net;
@@ -77,18 +78,40 @@ namespace Tests
 
             var repositories = IocManager.Instance.Resolve<IRepository<Randy.FrameworkCore.reposiories.test>>();
 
+            var db = IocManager.Instance.Resolve<IDbContextProvider>();
+            var dbcon = db.GetDbContext();
+
+            var db1 = IocManager.Instance.Resolve<IDbContextProvider>();
+            var dbcon1 = db1.GetDbContext();
+
+            Assert.Equal(dbcon, dbcon1);
+
             var all = repositories.GetAllList();
        
             var all1 = repositories.GetAllByPaged(1,1);
             var all2 = repositories.GetAllByPaged(2, 1);
 
-            var test = repositories.Insert(new Randy.FrameworkCore.reposiories.test { Name = "randy", Phone = "111" });
+            var test = repositories.Insert(new Randy.FrameworkCore.reposiories.test { Name = "Jenny", Phone = "110" });
             //repositories.Commit();
+
 
             Assert.NotNull(test);
             Assert.True(test.Id > 0);
             //var repositories = IocManager.Instance.Resolve<IRepository<A>>();
 
+        }
+
+        [Fact]
+        public void ServicesTest()
+        {
+            var ioc = IocManager.Instance;
+
+            var testService = ioc.Resolve<ITestService>();
+
+            testService.Test();
+
+
+            
         }
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Randy.FrameworkCore.reposiories
 {
-
+    //todo 可抽象成接口 
     /// <summary>
     /// for test mysql dbcontext
     /// </summary>
@@ -26,8 +26,8 @@ namespace Randy.FrameworkCore.reposiories
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             //home
-            // optionsBuilder.UseMySQL(@"Server=192.168.0.102;database=usersystem;uid=root;pwd=12345678");
-            optionsBuilder.UseMySQL(@"Server=192.168.10.163;database=usersystem;uid=root;pwd=12345678");
+             optionsBuilder.UseMySQL(@"Server=192.168.0.102;database=usersystem;uid=root;pwd=12345678");
+           //optionsBuilder.UseMySQL(@"Server=192.168.10.163;database=usersystem;uid=root;pwd=12345678");
 
         }
 

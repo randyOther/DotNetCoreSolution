@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace Randy.FrameworkCore.reposiories
 {
-    public class UnitofWorkDbProvider : IDbContextProvider, IDependentInjection
+    public class UnitofWorkDbProvider : IDbContextProvider//, IDependentInjection
     {
         private DbContext _dbcontext;
         public DbContext GetDbContext()
         {
             if (_dbcontext == null)
                 _dbcontext = new MysqlDbContext();
-
+            
             return _dbcontext;
         }
 

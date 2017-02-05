@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using Castle.DynamicProxy;
 using Randy.FrameworkCore.aspects;
+using Randy.FrameworkCore.reposiories;
 using System;
 using System.Linq;
 using System.Reflection;
@@ -27,6 +28,7 @@ namespace Randy.FrameworkCore.ioc
             _builder = new ContainerBuilder();
             //Register self!
             _builder.RegisterType<IocManager>(DependencyLifeStyleEnum.Singleton);
+            _builder.RegisterType<UnitofWorkDbProvider>().As<IDbContextProvider>().InstancePerLifetimeScope();
         }
 
         /// <summary>

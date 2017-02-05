@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 namespace Randy.FrameworkCore
 {
     /// <summary>
-    /// unit of work application service flag interface
+    /// unit of work application service flag class
     /// </summary>
     [Unitofwork]
+    public class ApplicationServices 
     {
     }
 }
