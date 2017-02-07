@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Randy.FrameworkCore
 {
-    public interface IEventBus 
+    public interface IEventBus  
     {
     }
 }

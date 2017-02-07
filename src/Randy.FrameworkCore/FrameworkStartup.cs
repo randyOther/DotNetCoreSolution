@@ -20,6 +20,7 @@ namespace Randy.FrameworkCore
 
         public static void InitFramework(Action<IocManager> action)
         {
+            //IocManager.Instance.RegisterAssemblyByConvention("");
             IocManager.Instance.RegisterAssemblyByConvention(typeof(IocManager).GetTypeInfo().Assembly);
             action(IocManager.Instance);
         }

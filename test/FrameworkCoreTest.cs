@@ -4,6 +4,7 @@ using Randy.FrameworkCore.aspects;
 using Randy.FrameworkCore.ioc;
 using Randy.FrameworkCore.log4net;
 using Randy.FrameworkCore.reposiories;
+using System;
 using System.Reflection;
 using test.TestModels;
 using Xunit;
@@ -116,8 +117,7 @@ namespace Tests
         public void EventBusTest()
         {
             var ioc = IocManager.Instance;
-
-
+   
         }
 
 
@@ -136,4 +136,7 @@ namespace Tests
 
 
     }
+
+         
+
 }
