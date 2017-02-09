@@ -9,7 +9,7 @@ namespace Randy.FrameworkCore
     /// 泛型 in 逆变，允许父类隐式转换为子类
     /// </summary>
     /// <typeparam name="TEventData"></typeparam>
-    public interface IEventHandler<in TEventData>
+    public interface IEventHandler<in TEventData> :IDependentInjection
     {
         void HandleEvent(TEventData eventData);
     }
