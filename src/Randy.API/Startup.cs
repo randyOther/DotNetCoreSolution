@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -9,11 +6,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Randy.FrameworkCore;
 using Microsoft.Extensions.PlatformAbstractions;
-using Swashbuckle.Swagger.Model;
-using Microsoft.AspNetCore.Mvc.ApplicationParts;
-using System.Reflection;
-using Microsoft.AspNetCore.Mvc.Controllers;
-using Randy.FrameworkCore.ioc;
+using System.IO;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace Randy.Api
 {
@@ -38,29 +32,28 @@ namespace Randy.Api
             services.AddMvc();
 
 
-            services.AddSwaggerGen();
-            services.ConfigureSwaggerGen(options =>
-            {
-                options.SingleApiVersion(new Info
+            services.AddSwaggerGen(c=> {
+                c.SwaggerDoc("v1", new Info
                 {
                     Version = "Version 1.0",
-                    Title = "Demo API",
-                    Description = "RESTful for ASP.NET Core",
+                    Title = "Core API",
+                    Description = "A simple example ASP.NET Core Web API",
+                    TermsOfService = "None",
+                    //Contact = new Contact { Name = "Shayne Boyer", Email = "", Url = "http://twitter.com/spboyer" },
+                    //License = new License { Name = "Use under LICX", Url = "http://url.com" }
                 });
+
+                //Set the comments path for the swagger json and ui.
                 var basePath = PlatformServices.Default.Application.ApplicationBasePath;
-                options.IncludeXmlComments(basePath + "\\Randy.Api.xml");
+                var xmlPath = Path.Combine(Path.Combine(basePath, "Randy.Api.xml"));
+                c.IncludeXmlComments(xmlPath);
             });
 
 
-            ////inject controller  ? 
-            //var manager = new ApplicationPartManager();
-            //manager.ApplicationParts.Add(new AssemblyPart(this.GetType().GetTypeInfo().Assembly));
-            //manager.FeatureProviders.Add(new ControllerFeatureProvider());
-            //IocManager.Instance.RegisterType<ApplicationPartManager>().AsSelf().SingleInstance();
-            //IocManager.Instance.RegisterTypes(feature.Controllers.Select(ti => ti.AsType()).ToArray()).PropertiesAutowired();
-
             return FrameworkStartup.GetAutofacProvider(services);
         }
+
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
@@ -70,9 +63,12 @@ namespace Randy.Api
 
             //use template swagger didnot work
             app.UseMvc();
-        
+
             app.UseSwagger();
-            app.UseSwaggerUi();
+            app.UseSwaggerUi(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Version 1.0");
+            });
         }
-}
+    }
 }

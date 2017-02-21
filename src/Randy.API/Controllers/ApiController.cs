@@ -6,8 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Randy.Api.Controllers
 {
+    /// <summary>
+    /// 控制器基类
+    /// </summary>
     [Route("[controller]/[action]")]
-    public abstract class ApiController:Controller
+    public abstract class ApiBaseController:Controller
     {
     }
 }

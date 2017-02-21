@@ -10,7 +10,7 @@ namespace Randy.Api.Controllers
     /// User application service
     /// </summary>
     //[Route("api/[controller]/[action]")]
-    public class UserController : ApiController
+    public class UserController : ApiBaseController
     {
         /// <summary>
         /// Get by id
