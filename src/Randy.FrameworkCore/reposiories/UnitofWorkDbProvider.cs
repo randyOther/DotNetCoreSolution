@@ -8,13 +8,13 @@ namespace Randy.FrameworkCore.reposiories
 {
     public class UnitofWorkDbProvider : IDbContextProvider//, IDependentInjection
     {
-        private DbContext _dbcontext;
+
+        public IDbContext DbContext { get; set; }
+
+        //private DbContext _dbcontext;
         public DbContext GetDbContext()
         {
-            if (_dbcontext == null)
-                _dbcontext = new MysqlDbContext();
-            
-            return _dbcontext;
+            return DbContext.GetCurrentDbcontext();
         }
 
     }

@@ -8,6 +8,7 @@ using Randy.FrameworkCore;
 using Microsoft.Extensions.PlatformAbstractions;
 using System.IO;
 using Swashbuckle.AspNetCore.Swagger;
+using Randy.Api.MiddlerWares;
 
 namespace Randy.Api
 {
@@ -63,7 +64,8 @@ namespace Randy.Api
 
             //use template swagger didnot work
             app.UseMvc();
-
+            //custom 
+            app.TestMiddlerWare();
             app.UseSwagger();
             app.UseSwaggerUi(c =>
             {

@@ -80,7 +80,7 @@ namespace Tests
             var repositories = IocManager.Instance.Resolve<IRepository<Randy.FrameworkCore.reposiories.test>>();
 
             var db = IocManager.Instance.Resolve<IDbContextProvider>();
-            var dbcon = db.GetDbContext();
+            var dbcon = db.GetDbContext();  //idbcontext don't imp class
 
             var db1 = IocManager.Instance.Resolve<IDbContextProvider>();
             var dbcon1 = db1.GetDbContext();

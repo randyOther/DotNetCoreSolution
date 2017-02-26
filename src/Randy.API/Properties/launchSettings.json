@@ -19,7 +19,7 @@
     "Randy.Api": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "http://localhost:5000/swagger/index.html",
+      "launchUrl": "http://localhost:8080/swagger/index.html",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
