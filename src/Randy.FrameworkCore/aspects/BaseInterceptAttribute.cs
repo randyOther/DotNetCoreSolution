@@ -22,10 +22,11 @@ namespace Randy.FrameworkCore.aspects
                 OnExcuted(invocation);
             }
             catch (Exception ex)
-            {
+            {  
                 var log = IocManager.Instance.Resolve<ILogWrap>();
                 log.Write("core framework catch exception",LogEnumType.Error, ex);
-                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.Message);  
+                throw ex;
             }
         }
 

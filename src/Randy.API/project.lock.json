@@ -30,6 +30,23 @@
           "lib/netstandard1.1/Autofac.Extensions.DependencyInjection.dll": {}
         }
       },
+      "AutoMapper/5.2.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.CSharp": "4.0.1",
+          "NETStandard.Library": "1.6.0",
+          "System.Collections.Specialized": "4.0.1",
+          "System.ComponentModel.TypeConverter": "4.1.0",
+          "System.Dynamic.Runtime": "4.0.11",
+          "System.Linq.Queryable": "4.0.1"
+        },
+        "compile": {
+          "lib/netstandard1.3/AutoMapper.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.3/AutoMapper.dll": {}
+        }
+      },
       "Castle.Core/4.0.0-beta002": {
         "type": "package",
         "dependencies": {
@@ -3879,6 +3896,35 @@
           "lib/netstandard1.3/System.Xml.XPath.XDocument.dll": {}
         }
       },
+      "Randy.Application/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v1.6",
+        "dependencies": {
+          "AutoMapper": "5.2.0",
+          "NETStandard.Library": "1.6.0",
+          "Randy.FrameworkCore": "1.0.0"
+        },
+        "compile": {
+          "netstandard1.6/Randy.Application.dll": {}
+        },
+        "runtime": {
+          "netstandard1.6/Randy.Application.dll": {}
+        }
+      },
+      "Randy.DomainCore/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v1.6",
+        "dependencies": {
+          "AutoMapper": "5.2.0",
+          "NETStandard.Library": "1.6.0"
+        },
+        "compile": {
+          "netstandard1.6/Randy.DomainCore.dll": {}
+        },
+        "runtime": {
+          "netstandard1.6/Randy.DomainCore.dll": {}
+        }
+      },
       "Randy.FrameworkCore/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.6",
@@ -3925,6 +3971,21 @@
         "Autofac.Extensions.DependencyInjection.nuspec",
         "lib/netstandard1.1/Autofac.Extensions.DependencyInjection.dll",
         "lib/netstandard1.1/Autofac.Extensions.DependencyInjection.xml"
+      ]
+    },
+    "AutoMapper/5.2.0": {
+      "sha512": "ulUMmzFg1vAFMpTyJsplgnC7pOIFlb25dbldHd7J4eroQWjSV4iAoOQ33h1oMjf6mLo3uZ8aRNUN2rgpOeSE1w==",
+      "type": "package",
+      "path": "AutoMapper/5.2.0",
+      "files": [
+        "AutoMapper.5.2.0.nupkg.sha512",
+        "AutoMapper.nuspec",
+        "lib/net45/AutoMapper.dll",
+        "lib/net45/AutoMapper.xml",
+        "lib/netstandard1.1/AutoMapper.dll",
+        "lib/netstandard1.1/AutoMapper.xml",
+        "lib/netstandard1.3/AutoMapper.dll",
+        "lib/netstandard1.3/AutoMapper.xml"
       ]
     },
     "Castle.Core/4.0.0-beta002": {
@@ -10106,6 +10167,16 @@
         "system.xml.xpath.xdocument.nuspec"
       ]
     },
+    "Randy.Application/1.0.0": {
+      "type": "project",
+      "path": "../Randy.Application/project.json",
+      "msbuildProject": "../Randy.Application/Randy.Application.xproj"
+    },
+    "Randy.DomainCore/1.0.0": {
+      "type": "project",
+      "path": "../Randy.DomainCore/project.json",
+      "msbuildProject": "../Randy.DomainCore/Randy.DomainCore.xproj"
+    },
     "Randy.FrameworkCore/1.0.0": {
       "type": "project",
       "path": "../Randy.FrameworkCore/project.json",
@@ -10126,6 +10197,8 @@
       "Microsoft.Extensions.Logging.Debug >= 1.0.0",
       "Microsoft.Extensions.Options.ConfigurationExtensions >= 1.0.0",
       "Microsoft.NETCore.App >= 1.0.1",
+      "Randy.Application >= 1.0.0-*",
+      "Randy.DomainCore >= 1.0.0-*",
       "Randy.FrameworkCore >= 1.0.0-*",
       "Swashbuckle.AspNetCore >= 1.0.0-rc1"
     ],

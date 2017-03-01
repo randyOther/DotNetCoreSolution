@@ -1,14 +1,16 @@
-﻿using System;
+﻿using Randy.FrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Randy.Application
 {
-    public class Class1
+    public interface IUserService : IDependentInjection
     {
-        public Class1()
-        {
-        }
+        
+
+
     }
+
 }

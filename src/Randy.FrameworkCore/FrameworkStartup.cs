@@ -22,6 +22,7 @@ namespace Randy.FrameworkCore
         {
             //IocManager.Instance.RegisterAssemblyByConvention("");
             IocManager.Instance.RegisterAssemblyByConvention(typeof(IocManager).GetTypeInfo().Assembly);
+            EventBusInstaller.Install(typeof(IocManager).GetTypeInfo().Assembly);
             action(IocManager.Instance);
         }
 
@@ -52,9 +53,10 @@ namespace Randy.FrameworkCore
                 foreach (var item in assemblyName)
                 {
                     IocManager.Instance.RegisterAssemblyByConvention(item);
-
+                    EventBusInstaller.Install(Assembly.Load(new AssemblyName(item)));
                 }
             }
+
 
             return GetAutofacProvider(populateService);
         }

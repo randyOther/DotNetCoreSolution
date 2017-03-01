@@ -9,6 +9,7 @@ using Microsoft.Extensions.PlatformAbstractions;
 using System.IO;
 using Swashbuckle.AspNetCore.Swagger;
 using Randy.Api.MiddlerWares;
+using System.Reflection;
 
 namespace Randy.Api
 {
@@ -51,7 +52,7 @@ namespace Randy.Api
             });
 
 
-            return FrameworkStartup.GetAutofacProvider(services);
+            return FrameworkStartup.GetAutofacProvider(services, new string[] { this.GetType().GetTypeInfo().Assembly.FullName });
         }
 
 
