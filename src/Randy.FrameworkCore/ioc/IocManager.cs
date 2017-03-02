@@ -28,7 +28,7 @@ namespace Randy.FrameworkCore.ioc
             _builder = new ContainerBuilder();
             //Register self!
             _builder.RegisterType<IocManager>(DependencyLifeStyleEnum.Singleton).PropertiesAutowired(); 
-            _builder.RegisterType<EventBus>(DependencyLifeStyleEnum.Singleton).PropertiesAutowired(); 
+            _builder.RegisterType<EventBus>(DependencyLifeStyleEnum.Singleton).As<IEventBus>().PropertiesAutowired(); 
             _builder.RegisterType<UnitofWorkDbProvider>().As<IDbContextProvider>().InstancePerLifetimeScope().PropertiesAutowired();
         }
 

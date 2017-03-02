@@ -116,8 +116,9 @@ namespace Tests
         [Fact]
         public void EventBusTest()
         {
-            var ioc = IocManager.Instance;
-   
+
+            //var ioc = IocManager.Instance;
+            EventBusInstaller.Install(typeof(IocManager).GetTypeInfo().Assembly);
         }
 
 

@@ -3916,7 +3916,9 @@
         "framework": ".NETStandard,Version=v1.6",
         "dependencies": {
           "AutoMapper": "5.2.0",
-          "NETStandard.Library": "1.6.0"
+          "NETStandard.Library": "1.6.0",
+          "Randy.FrameworkCore": "1.0.0",
+          "Randy.Infrastructure": "1.0.0"
         },
         "compile": {
           "netstandard1.6/Randy.DomainCore.dll": {}
@@ -3944,6 +3946,21 @@
         },
         "runtime": {
           "netstandard1.6/Randy.FrameworkCore.dll": {}
+        }
+      },
+      "Randy.Infrastructure/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v1.6",
+        "dependencies": {
+          "NETStandard.Library": "1.6.0",
+          "Randy.FrameworkCore": "1.0.0",
+          "SapientGuardian.EntityFrameworkCore.MySql": "7.1.15"
+        },
+        "compile": {
+          "netstandard1.6/Randy.Infrastructure.dll": {}
+        },
+        "runtime": {
+          "netstandard1.6/Randy.Infrastructure.dll": {}
         }
       }
     }
@@ -10181,6 +10198,11 @@
       "type": "project",
       "path": "../Randy.FrameworkCore/project.json",
       "msbuildProject": "../Randy.FrameworkCore/Randy.FrameworkCore.xproj"
+    },
+    "Randy.Infrastructure/1.0.0": {
+      "type": "project",
+      "path": "../Randy.Infrastructure/project.json",
+      "msbuildProject": "../Randy.Infrastructure/Randy.Infrastructure.xproj"
     }
   },
   "projectFileDependencyGroups": {

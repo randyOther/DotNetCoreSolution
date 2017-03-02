@@ -1,5 +1,12 @@
+#:D:\Developer\DotNetCoreSolution\src\Randy.DomainCore\Randy.DomainCore.xproj
+D:\Developer\DotNetCoreSolution\src\Randy.DomainCore\Randy.DomainCore.xproj|D:\Developer\DotNetCoreSolution\src\Randy.FrameworkCore\Randy.FrameworkCore.xproj
+D:\Developer\DotNetCoreSolution\src\Randy.DomainCore\Randy.DomainCore.xproj|D:\Developer\DotNetCoreSolution\src\Randy.Infrastructure\Randy.Infrastructure.xproj
+D:\Developer\DotNetCoreSolution\src\Randy.Infrastructure\Randy.Infrastructure.xproj|D:\Developer\DotNetCoreSolution\src\Randy.FrameworkCore\Randy.FrameworkCore.xproj
 #:D:\Developer\DotNetCoreSolution\src\Randy.Api\Randy.Api.xproj
-D:\Developer\DotNetCoreSolution\src\Randy.Api\Randy.Api.xproj|D:\Developer\DotNetCoreSolution\src\Randy.FrameworkCore\Randy.FrameworkCore.xproj
-D:\Developer\DotNetCoreSolution\src\Randy.Api\Randy.Api.xproj|D:\Developer\DotNetCoreSolution\src\Randy.DomainCore\Randy.DomainCore.xproj
 D:\Developer\DotNetCoreSolution\src\Randy.Api\Randy.Api.xproj|D:\Developer\DotNetCoreSolution\src\Randy.Application\Randy.Application.xproj
+D:\Developer\DotNetCoreSolution\src\Randy.Api\Randy.Api.xproj|D:\Developer\DotNetCoreSolution\src\Randy.DomainCore\Randy.DomainCore.xproj
+D:\Developer\DotNetCoreSolution\src\Randy.Api\Randy.Api.xproj|D:\Developer\DotNetCoreSolution\src\Randy.FrameworkCore\Randy.FrameworkCore.xproj
 D:\Developer\DotNetCoreSolution\src\Randy.Application\Randy.Application.xproj|D:\Developer\DotNetCoreSolution\src\Randy.FrameworkCore\Randy.FrameworkCore.xproj
+D:\Developer\DotNetCoreSolution\src\Randy.DomainCore\Randy.DomainCore.xproj|D:\Developer\DotNetCoreSolution\src\Randy.FrameworkCore\Randy.FrameworkCore.xproj
+D:\Developer\DotNetCoreSolution\src\Randy.DomainCore\Randy.DomainCore.xproj|D:\Developer\DotNetCoreSolution\src\Randy.Infrastructure\Randy.Infrastructure.xproj
+D:\Developer\DotNetCoreSolution\src\Randy.Infrastructure\Randy.Infrastructure.xproj|D:\Developer\DotNetCoreSolution\src\Randy.FrameworkCore\Randy.FrameworkCore.xproj

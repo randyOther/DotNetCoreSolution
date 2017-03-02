@@ -10,6 +10,7 @@ using System.IO;
 using Swashbuckle.AspNetCore.Swagger;
 using Randy.Api.MiddlerWares;
 using System.Reflection;
+using System.Runtime.Loader;
 
 namespace Randy.Api
 {
@@ -34,7 +35,8 @@ namespace Randy.Api
             services.AddMvc();
 
 
-            services.AddSwaggerGen(c=> {
+            services.AddSwaggerGen(c =>
+            {
                 c.SwaggerDoc("v1", new Info
                 {
                     Version = "Version 1.0",
@@ -52,7 +54,9 @@ namespace Randy.Api
             });
 
 
-            return FrameworkStartup.GetAutofacProvider(services, new string[] { this.GetType().GetTypeInfo().Assembly.FullName });
+            return FrameworkStartup.GetAutofacProvider(services,
+                                                       new string[] { this.GetType().GetTypeInfo().Assembly.FullName
+                                                                     , typeof(Application.IUserService).GetTypeInfo().Assembly.FullName });
         }
 
 

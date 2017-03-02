@@ -11,20 +11,39 @@ namespace Randy.FrameworkCore
     /// <summary>
     /// sigleton imp event bus
     /// </summary>
-    public class EventBus : IEventBus 
+    public class EventBus : IEventBus
     {
-        //private readonly ConcurrentDictionary<Type, List<IEventHandlerFactory>> _handlerFactories;
+        private ConcurrentDictionary<Type, Action<IEventData>> _handlerFactories;
+
+        public EventBus()
+        {
+            _handlerFactories = new ConcurrentDictionary<Type, Action<IEventData>>();
+        }
 
 
-        //public IDisposable Register<TEventData, THandler>()
-        //    where TEventData : IEventData
-        //    where THandler : IEventHandler<TEventData>, new()
-        //{
-        //    return Register(typeof(TEventData), new TransientEventHandlerFactory<THandler>());
-        //}
+        public void Register(Type type, Action<IEventData> action)
+        {
+            if (_handlerFactories.ContainsKey(type))
+                return;
+
+            _handlerFactories.TryAdd(type, action);
+        }
 
 
-     
+        public void Trigger(IEventData data)
+        {
+            Action<IEventData> action = null;
+
+            _handlerFactories.TryGetValue(data.GetType(), out action);
+
+            action?.Invoke(data);
+
+        }
+
+        ~EventBus()
+        {
+            _handlerFactories = null;
+        }
 
     }
 
@@ -38,23 +57,35 @@ namespace Randy.FrameworkCore
                 var assembly = Assembly.Load(new AssemblyName(name));
                 Install(assembly);
             }
-      
+
         }
 
         public static void Install(Assembly assembly)
         {
-            //todo: 注册type 处理对应事件 
-            //var types = assembly.GetTypes();
-            //if (types != null && types.Count() > 0)
-            //{
-            //    foreach (var type in types)
-            //    {
-            //        if (typeof(IDependentInjection).IsAssignableFrom(type) && !type.GetTypeInfo().IsAbstract)
-            //        {
-                        
-            //        }
-            //    }
-            //}
+
+            var signletonBus = ioc.IocManager.Instance.Resolve<IEventBus>();
+
+            if (signletonBus == null)
+                return;
+
+            var types = assembly.GetTypes();
+
+            if (types != null && types.Count() > 0)
+            {
+                foreach (var type in types)
+                {
+                    var eventHandlerType = type.GetInterfaces().FirstOrDefault(f => f.Name == typeof(IEventHandler<>).Name);
+
+                    if (eventHandlerType != null)
+                    {
+                        var t = eventHandlerType.GetGenericArguments().FirstOrDefault(s => typeof(IEventData).IsAssignableFrom(s));
+                        var method = eventHandlerType.GetMethod("HandleEvent");
+                        var instance = Activator.CreateInstance(type);
+
+                        signletonBus.Register(t, (data) => { method.Invoke(instance, new[] { data }); });
+                    }
+                }
+            }
         }
     }
 }

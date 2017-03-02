@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Randy.Application;
 
 namespace Randy.Api.Controllers
 {
@@ -12,6 +13,14 @@ namespace Randy.Api.Controllers
     //[Route("api/[controller]/[action]")]
     public class UserController : ApiBaseController
     {
+
+        public IUserService UserService { get; set; }
+
+        public UserController(IUserService userService)
+        {
+            UserService = userService;
+        }
+
         /// <summary>
         /// Get by id
         /// </summary>

@@ -7,5 +7,8 @@ namespace Randy.FrameworkCore
 {
     public interface IEventBus  
     {
+        void Register(Type type, Action<IEventData> action);
+
+        void Trigger(IEventData data);
     }
 }

@@ -53,8 +53,8 @@ namespace Randy.FrameworkCore
                 foreach (var item in assemblyName)
                 {
                     IocManager.Instance.RegisterAssemblyByConvention(item);
-                    EventBusInstaller.Install(Assembly.Load(new AssemblyName(item)));
                 }
+                EventBusInstaller.Install(assemblyName);
             }
 
 
