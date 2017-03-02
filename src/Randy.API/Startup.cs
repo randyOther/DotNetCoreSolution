@@ -55,8 +55,9 @@ namespace Randy.Api
 
 
             return FrameworkStartup.GetAutofacProvider(services,
-                                                       new string[] { this.GetType().GetTypeInfo().Assembly.FullName
-                                                                     , typeof(Application.IUserService).GetTypeInfo().Assembly.FullName });
+                                                       new string[] { this.GetType().GetTypeInfo().Assembly.FullName,
+                                                            typeof(Application.ApplicationMain).GetTypeInfo().Assembly.FullName,
+                                                            typeof(DomainCore.DomainCoreMain).GetTypeInfo().Assembly.FullName  });
         }
 
 
