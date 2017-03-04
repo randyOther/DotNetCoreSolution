@@ -50,7 +50,7 @@ namespace Randy.FrameworkCore
 
     public class EventBusInstaller
     {
-        public static void Install(string[] assemblyNames)
+        public void Install(string[] assemblyNames)
         {
             foreach (var name in assemblyNames)
             {
@@ -60,7 +60,7 @@ namespace Randy.FrameworkCore
 
         }
 
-        public static void Install(Assembly assembly)
+        public void Install(Assembly assembly)
         {
 
             var signletonBus = ioc.IocManager.Instance.Resolve<IEventBus>();

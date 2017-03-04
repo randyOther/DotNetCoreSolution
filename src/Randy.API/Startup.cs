@@ -11,6 +11,7 @@ using Swashbuckle.AspNetCore.Swagger;
 using Randy.Api.MiddlerWares;
 using System.Reflection;
 using System.Runtime.Loader;
+using AutoMapper;
 
 namespace Randy.Api
 {
@@ -56,7 +57,6 @@ namespace Randy.Api
 
             return FrameworkStartup.GetAutofacProvider(services,
                                                        new string[] { this.GetType().GetTypeInfo().Assembly.FullName,
-                                                            typeof(Application.ApplicationMain).GetTypeInfo().Assembly.FullName,
                                                             typeof(DomainCore.DomainCoreMain).GetTypeInfo().Assembly.FullName  });
         }
 
@@ -68,10 +68,14 @@ namespace Randy.Api
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
+            Mapper.Initialize(x =>
+            {
+                x.AddProfile<DomainCore.dtos.DtoMapperProfile>();
+            });
             //use template swagger didnot work
             app.UseMvc();
             //custom 
-            app.TestMiddlerWare();
+            //app.TestMiddlerWare();
             app.UseSwagger();
             app.UseSwaggerUi(c =>
             {

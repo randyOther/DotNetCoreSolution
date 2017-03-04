@@ -15,5 +15,6 @@ namespace Randy.FrameworkCore
     [Unitofwork]
     public class ApplicationServices
     {
+
     }
 }

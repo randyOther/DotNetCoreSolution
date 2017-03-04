@@ -18,8 +18,7 @@
     //"Swashbuckle": "6.0.0-beta902",
     "Randy.FrameworkCore": "1.0.0-*",
     "Swashbuckle.AspNetCore": "1.0.0-rc1",
-    "Randy.DomainCore": "1.0.0-*",
-    "Randy.Application": "1.0.0-*"
+    "Randy.DomainCore": "1.0.0-*"
   },
 
   "tools": {
