@@ -54,10 +54,11 @@ namespace Randy.Api
                 c.IncludeXmlComments(xmlPath);
             });
 
-
+            
             return FrameworkStartup.GetAutofacProvider(services,
                                                        new string[] { this.GetType().GetTypeInfo().Assembly.FullName,
-                                                            typeof(DomainCore.DomainCoreMain).GetTypeInfo().Assembly.FullName  });
+                                                            typeof(DomainCore.DomainCoreMain).GetTypeInfo().Assembly.FullName ,
+                                                            typeof(Infrastructure.BaseDbContext).GetTypeInfo().Assembly.FullName  });
         }
 
 
@@ -72,6 +73,7 @@ namespace Randy.Api
             {
                 x.AddProfile<DomainCore.dtos.DtoMapperProfile>();
             });
+            Infrastructure.ConfigurationManager.SetConfig(Configuration);
             //use template swagger didnot work
             app.UseMvc();
             //custom 

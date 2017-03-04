@@ -28,9 +28,9 @@ namespace Randy.Api.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        public ReturnModel<User> Login()
+        public ReturnModel<User> Login([FromBody]int id)
         {
-            return UserService.Login();
+            return UserService.Login(new DomainCore.DTO.User {  Name="randy", NickName="dfsaf", UserId=1});
    
         }
 

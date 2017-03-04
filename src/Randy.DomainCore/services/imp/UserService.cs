@@ -11,13 +11,13 @@ using System.Threading.Tasks;
 
 namespace Randy.DomainCore
 {
-    [LogInterceptor]
+    [LogRequest]
     public class UserService : ApplicationServices, IUserService
     {
 
         public IRepository<ls_user> UserRepository { get; set; }
 
-        public ReturnModel<User> Login()
+        public ReturnModel<User> Login(User user)
         {
             ReturnModel<User> result = new ReturnModel<DTO.User>();
 

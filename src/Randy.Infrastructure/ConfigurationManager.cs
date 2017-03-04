@@ -1,23 +1,24 @@
 ﻿using Microsoft.Extensions.Configuration;
 using System.IO;
 
-namespace Randy.FrameworkCore
+namespace Randy.Infrastructure
 {
     /// <summary>
     /// get configration through appsettings.json
     /// </summary>
     public class ConfigurationManager
     {
+
         private static IConfiguration config;
 
-        static ConfigurationManager()
+        public static void SetConfig(IConfiguration cig)
         {
-            if (config == null)
-                config = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json", optional: true, reloadOnChange: true).Build();
+            config = cig;
         }
 
         public static string GetConfigValue(string name)
-        {   
+        {
+
             if (config.GetSection(name) == null)
                 return "";
 

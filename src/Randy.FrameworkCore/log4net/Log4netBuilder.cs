@@ -44,7 +44,7 @@ namespace Randy.FrameworkCore.log4net
             var repository = (Hierarchy)LogManager.GetRepository(typeof(Hierarchy).GetTypeInfo().Assembly);
 
             PatternLayout patternLayout = new PatternLayout();
-            patternLayout.ConversionPattern = "记录时间：%date 线程ID:[%thread] 日志级别：%-5level 日志描述：%message%newline%newline";
+            patternLayout.ConversionPattern = "%newline%newline记录时间：%date 线程ID:[%thread] 日志级别：%-5level 日志描述：%message";
             patternLayout.ActivateOptions();
 
 

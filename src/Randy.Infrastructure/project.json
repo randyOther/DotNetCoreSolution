@@ -4,7 +4,9 @@
   "dependencies": {
     "NETStandard.Library": "1.6.0",
     "Randy.FrameworkCore": "1.0.0-*",
-    "SapientGuardian.EntityFrameworkCore.MySql": "7.1.15"
+    "SapientGuardian.EntityFrameworkCore.MySql": "7.1.15",
+    "Microsoft.Extensions.Configuration.FileExtensions": "1.0.0",
+    "Newtonsoft.Json": "10.0.1-beta1"
   },
 
   "frameworks": {
