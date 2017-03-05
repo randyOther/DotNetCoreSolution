@@ -28,12 +28,12 @@ namespace Randy.FrameworkCore
             //1、IOC container
             IocManager.Instance.RegisterAssemblyByConvention(typeof(IocManager).GetTypeInfo().Assembly);
             //2、Event Bus init
-            //EventBusInstaller installer = new EventBusInstaller();
-            //if (_assemblys != null && _assemblys.Length > 0)
-            //{
-            //    installer.Install(_assemblys);
-            //}
-            //installer.Install(typeof(IocManager).GetTypeInfo().Assembly);
+            EventBusInstaller installer = new EventBusInstaller();
+            installer.Install(typeof(IocManager).GetTypeInfo().Assembly);
+            if (_assemblys != null && _assemblys.Length > 0)
+            {
+                installer.Install(_assemblys);
+            }
 
             action(IocManager.Instance);
         }
@@ -46,8 +46,9 @@ namespace Randy.FrameworkCore
         /// <returns></returns>
         public static IServiceProvider GetAutofacProvider(IServiceCollection populateService)
         {
-            InitFramework();
+  
             IocManager.Instance.GetBuilder().Populate(populateService);
+            InitFramework();
             return new AutofacServiceProvider(IocManager.Instance.GetContanier());
         }
 

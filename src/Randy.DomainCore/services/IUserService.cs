@@ -11,8 +11,7 @@ namespace Randy.DomainCore
     public interface IUserService : IDependentInjection
     {
 
-        ReturnModel<User> Login(User user);
-        ReturnModel LogOut();
+        ReturnModel<User> Login(string userName, string password, string ip="");
         ReturnModel SignUp();
     }
 

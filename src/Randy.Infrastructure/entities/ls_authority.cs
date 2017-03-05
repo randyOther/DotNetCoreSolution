@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -7,6 +8,8 @@ namespace Randy.Infrastructure.entities
 {
     public class ls_authority
     {
+        //public int Id { get; set; }
+        [Key]
         public int AuthorityId { get; set; }
         public bool IsDelete { get; set; }
         public DateTime CreateDate { get; set; }

@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Randy.DomainCore.DTO;
+using Randy.Infrastructure.entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +12,7 @@ namespace Randy.DomainCore.dtos
     {
         protected override void Configure()
         {
-           //CreateMap<>() 
+            CreateMap<ls_user, User>();
         }
     }
 }

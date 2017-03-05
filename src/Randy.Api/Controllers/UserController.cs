@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Randy.DomainCore;
 using Randy.DomainCore.DTO;
 using Randy.Infrastructure;
+using Randy.Api.Models;
 
 namespace Randy.Api.Controllers
 {
@@ -28,9 +29,9 @@ namespace Randy.Api.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        public ReturnModel<User> Login([FromBody]int id)
+        public ReturnModel<User> Login([FromBody]LoginRequest request)
         {
-            return UserService.Login(new DomainCore.DTO.User {  Name="randy", NickName="dfsaf", UserId=1});
+            return UserService.Login(request.UserName, request.Password,HttpContext.Connection.RemoteIpAddress.ToString());
    
         }
 

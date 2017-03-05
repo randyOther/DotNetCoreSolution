@@ -7,9 +7,20 @@ namespace Randy.DomainCore.DTO
 {
     public class User
     {
-        public string Name { get; set; }
-        public string NickName { get; set; }
+
         public int UserId { get; set; }
+        public string Email { get; set; }
+
+        public DateTime LastLoginTime { get; set; }
+        public string LastLoginIP { get; set; }
+        public string Status { get; set; }
+        public string Phone { get; set; }
+
+        public bool IsDelete { get; set; }
+        public DateTime CreateDate { get; set; }
+        public DateTime? ModifyDate { get; set; }
+        public int CreateByUserId { get; set; }
+        public int ModifyByUserId { get; set; }
 
     }
 }
