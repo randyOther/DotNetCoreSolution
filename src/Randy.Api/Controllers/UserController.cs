@@ -37,6 +37,17 @@ namespace Randy.Api.Controllers
 
 
         /// <summary>
+        /// SignUp User
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ReturnModel SignUp([FromBody]SignUpInput request)
+        {
+            return UserService.SignUp(request);
+        }
+
+        /// <summary>
         /// get GetTwoParam
         /// </summary>
         /// <returns>empty</returns>

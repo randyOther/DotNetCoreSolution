@@ -23,4 +23,15 @@ namespace Randy.DomainCore.DTO
         public int ModifyByUserId { get; set; }
 
     }
+
+    public class SignUpInput
+    {
+        /// <summary>
+        /// email or phone
+        /// </summary>
+        public string UserName { get; set; }
+        public string Password{get;set;}
+        
+        public string CompanyName { get; set; }
+    }
 }
