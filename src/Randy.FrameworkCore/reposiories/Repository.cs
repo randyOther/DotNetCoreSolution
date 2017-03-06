@@ -172,12 +172,12 @@ namespace Randy.FrameworkCore.reposiories
         public List<TEntity> GetAllByPaged(int page, int pageSize, Expression<Func<TEntity, bool>> predicate)
         {
 
-            return Table.Where(predicate).OrderBy(s => s.ToString()).Skip((page - 1)*pageSize).Take(pageSize).ToList();
+            return Table.Where(predicate).OrderBy(s => s.ToString()).Skip((page - 1) * pageSize).Take(pageSize).ToList();
         }
 
         public List<TEntity> GetAllByPaged(int page, int pageSize)
         {
-            return Table.OrderBy(s=>s.ToString()).Skip((page - 1) * pageSize).Take(pageSize).ToList();
+            return Table.OrderBy(s => s.ToString()).Skip((page - 1) * pageSize).Take(pageSize).ToList();
         }
     }
 }

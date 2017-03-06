@@ -29,7 +29,7 @@ namespace Randy.FrameworkCore.ioc
             //Register self!
             _builder.RegisterType<IocManager>(DependencyLifeStyleEnum.Singleton).PropertiesAutowired(); 
             _builder.RegisterType<EventBus>(DependencyLifeStyleEnum.Singleton).As<IEventBus>().PropertiesAutowired(); 
-            _builder.RegisterType<UnitofWorkDbProvider>().As<IDbContextProvider>().InstancePerLifetimeScope().PropertiesAutowired();
+            _builder.RegisterType<UnitofWorkDbProvider>().As<IDbContextProvider>().SingleInstance().PropertiesAutowired();
         }
 
         /// <summary>

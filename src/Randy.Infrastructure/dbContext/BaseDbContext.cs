@@ -31,7 +31,7 @@ namespace Randy.Infrastructure
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<ls_authority>().HasKey(d => d.AuthorityId);
+            //modelBuilder.Entity<ls_authority>().HasKey(d => d.AuthorityId);
             base.OnModelCreating(modelBuilder);
         }
 

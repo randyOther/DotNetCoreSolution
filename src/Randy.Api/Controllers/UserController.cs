@@ -47,26 +47,29 @@ namespace Randy.Api.Controllers
             return UserService.SignUp(request);
         }
 
-        /// <summary>
-        /// get GetTwoParam
-        /// </summary>
-        /// <returns>empty</returns>
-        //[HttpGet("{id}/{code}")]
-        //public string GetTwoParam(int id, int code)
-        //{
-        //    return id + "one" + code;
-        //}
+
 
         /// <summary>
-        /// del user
+        /// Set User info
         /// </summary>
-        /// <param name="user">delete the user</param>
+        /// <param name="request"></param>
         /// <returns></returns>
-        //[HttpPost]
-        //public bool Delete([FromBody]User user)
-        //{
-        //    return true;
-        //}
+        [HttpPost]
+        public ReturnModel SetUserInfo([FromBody]UserInfo request)
+        {
+            return UserService.SetUserInfo(request);
+        }
+
+
+        /// <summary>
+        /// get GetParam test
+        /// </summary>
+        /// <returns>empty</returns>
+        [HttpGet("{id}/{code}")]
+        public string GetParam(int id, int code)
+        {
+            return id + "【Get】" + code;
+        }
 
     }
 

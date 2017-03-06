@@ -12,6 +12,7 @@ namespace Randy.DomainCore.dtos
         protected override void Configure()
         {
             CreateMap<ls_user, User>();
+            CreateMap<UserInfo, ls_user_info>();
         }
     }
 }
