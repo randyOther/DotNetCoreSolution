@@ -7,8 +7,8 @@ namespace Randy.DomainCore
 {
     public class Role
     {
-        public Role()
-        {
-        }
+
+        public List<Permission> Permissions { get; set; }
+
     }
 }

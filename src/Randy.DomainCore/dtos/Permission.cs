@@ -5,10 +5,8 @@ using System.Threading.Tasks;
 
 namespace Randy.DomainCore
 {
-    /// <summary>
-    /// just flag class 
-    /// </summary>
-    public class DomainCoreMain
+    public class Permission
     {
+
     }
 }

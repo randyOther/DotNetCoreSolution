@@ -21,7 +21,6 @@ namespace Randy.DomainCore.DTO
         public DateTime? ModifyDate { get; set; }
         public int CreateByUserId { get; set; }
         public int ModifyByUserId { get; set; }
-
     }
 
     public class SignUpInput

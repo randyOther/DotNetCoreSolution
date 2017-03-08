@@ -7,8 +7,6 @@ namespace Randy.DomainCore
 {
     public class Company
     {
-        public Company()
-        {
-        }
+
     }
 }

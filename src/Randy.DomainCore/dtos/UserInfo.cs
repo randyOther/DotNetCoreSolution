@@ -21,6 +21,10 @@ namespace Randy.DomainCore.DTO
         public DateTime? BirthDate { get; set; }
         public string ExtendInfo { get; set; }
 
+        public Company Company { get; set; }
+
+        public Role Role { get; set; }
+
     }
 
 }

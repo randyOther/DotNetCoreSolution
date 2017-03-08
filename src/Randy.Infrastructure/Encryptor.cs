@@ -28,13 +28,13 @@ namespace Randy.Infrastructure
             return res;
         }
 
-        //AES 对称
+        //AES/DES 对称
         //public static T JsonToObject<T>(string input)
         //{
         //    return JsonConvert.DeserializeObject<T>(input);
         //}
 
 
-        //DES 非对称
+        //RSA 非对称
     }
 }
