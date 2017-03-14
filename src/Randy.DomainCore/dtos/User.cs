@@ -19,7 +19,7 @@ namespace Randy.DomainCore.DTO
         public bool IsDelete { get; set; }
         public DateTime CreateDate { get; set; }
         public DateTime? ModifyDate { get; set; }
-        public int CreateByUserId { get; set; }
+        public int CreateByUserId { get; set; } 
         public int ModifyByUserId { get; set; }
     }
 
