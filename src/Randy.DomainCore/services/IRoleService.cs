@@ -11,8 +11,11 @@ namespace Randy.DomainCore
 {
     public interface IRoleService : IDependentInjection
     {
-        ReturnModel GetUserRole(int userId);
+        ReturnModel<List<Role>> GetRoles();
+        ReturnModel GetRolePermission(int roleId);
 
+        ReturnModel CheckRolePermission(int roleId);
+        ReturnModel CheckRolePermission(string roleCode);
     }
 
 }

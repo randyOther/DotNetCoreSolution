@@ -10,20 +10,8 @@ namespace Randy.FrameworkCore.reposiories
     {
         #region Select/Get/Query
 
-        /// <summary>
-        /// Used to get a IQueryable that is used to retrieve entities from entire table.
-        /// </summary>
-        /// <returns>IQueryable to be used to select entities from database</returns>
-        //IQueryable<TEntity> GetAll();
 
-        /// <summary>
-        /// Used to get a IQueryable that is used to retrieve entities from entire table.
-        /// One or more 
-        /// </summary>
-        /// <param name="propertySelectors">A list of include expressions.</param>
-        /// <returns>IQueryable to be used to select entities from database</returns>
-        //IQueryable<TEntity> GetAllIncluding(params Expression<Func<TEntity, object>>[] propertySelectors);
-
+        IQueryable<TEntity> GetAll();
         List<TEntity> GetAllByPaged(int page, int pageSize, Expression<Func<TEntity, bool>> predicate);
 
         List<TEntity> GetAllByPaged(int page, int pageSize);
