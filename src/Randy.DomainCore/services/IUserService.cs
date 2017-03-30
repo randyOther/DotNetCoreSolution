@@ -16,6 +16,7 @@ namespace Randy.DomainCore
         ReturnModel SignUp(SignUpInput input);
         ReturnModel SetUserInfo(UserInfo info);
         ReturnModel<UserDetail> GetUserDetail(int userId);
+        ReturnPagedModel<ls_user_info> GetUserInfos(QueryPagedModel query);
     }
 
 }

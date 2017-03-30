@@ -147,6 +147,16 @@ namespace Randy.DomainCore
 
             return roles;
         }
+
+        public ReturnPagedModel<ls_user_info> GetUserInfos(QueryPagedModel query)
+        {
+            ReturnPagedModel<ls_user_info> result = new ReturnPagedModel<ls_user_info>();
+            int total = 0;
+            result.DataList = UserInfoRepository.GetAllByPaged(query.pageIndex, query.pageSize, out total);
+            result.Total = total;
+
+            return result;
+        }
     }
 
 }

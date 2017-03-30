@@ -7,6 +7,11 @@ using System.Threading.Tasks;
 
 namespace Randy.FrameworkCore.reposiories
 {
+
+    /// <summary>
+    /// todo : update function by properties 
+    /// </summary>
+    /// <typeparam name="TEntity"></typeparam>
     public class Repository<TEntity> : IRepository<TEntity>
          where TEntity : class
 
@@ -91,6 +96,13 @@ namespace Randy.FrameworkCore.reposiories
             return Table.Update(entity).Entity;
         }
 
+        //todo: reflection udpate properties 
+        //public TEntity Update(int keyId,Action<TEntity> )
+        //{
+        //    
+        //    return Table.Update(entity).Entity;
+        //}
+
         public Task<TEntity> UpdateAsync(TEntity entity)
         {
             return Task.FromResult(Update(entity));
@@ -169,14 +181,15 @@ namespace Randy.FrameworkCore.reposiories
             _dbcontext.SaveChanges();
         }
 
-        public List<TEntity> GetAllByPaged(int page, int pageSize, Expression<Func<TEntity, bool>> predicate)
+        public List<TEntity> GetAllByPaged(int page, int pageSize, Expression<Func<TEntity, bool>> predicate, out int total)
         {
-
+            total = Table.Where(predicate).Count();
             return Table.Where(predicate).OrderBy(s => s.ToString()).Skip((page - 1) * pageSize).Take(pageSize).ToList();
         }
 
-        public List<TEntity> GetAllByPaged(int page, int pageSize)
+        public List<TEntity> GetAllByPaged(int page, int pageSize,out int total)
         {
+            total = Table.Count();
             return Table.OrderBy(s => s.ToString()).Skip((page - 1) * pageSize).Take(pageSize).ToList();
         }
     }

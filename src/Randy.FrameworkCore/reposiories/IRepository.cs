@@ -12,9 +12,9 @@ namespace Randy.FrameworkCore.reposiories
 
 
         IQueryable<TEntity> GetAll();
-        List<TEntity> GetAllByPaged(int page, int pageSize, Expression<Func<TEntity, bool>> predicate);
+        List<TEntity> GetAllByPaged(int page, int pageSize, Expression<Func<TEntity, bool>> predicate, out int total);
 
-        List<TEntity> GetAllByPaged(int page, int pageSize);
+        List<TEntity> GetAllByPaged(int page, int pageSize, out int total);
 
         /// <summary>
         /// Used to get all entities.

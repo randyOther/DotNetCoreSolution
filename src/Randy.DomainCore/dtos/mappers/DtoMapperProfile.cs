@@ -16,6 +16,8 @@ namespace Randy.DomainCore.dtos
             CreateMap<ls_user_info, UserInfo>();
             CreateMap<ls_role, Role>();
             CreateMap<ls_authority, Permission>();
+            CreateMap<ls_company, Company>();
+
         }
     }
 }

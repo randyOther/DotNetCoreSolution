@@ -3,20 +3,20 @@
 namespace Randy.Api.Controllers
 {
     /// <summary>
-    /// Menu Controller
+    /// Company Controller
     /// </summary>
-    public class MenuController : ApiBaseController
+    public class CompanyController : ApiBaseController
     {
         /// <summary>
         /// get one Menu
         /// </summary>
         /// <returns>empty</returns>
         [HttpGet]
-        public string GetOne()
+        public string CreateCompany()
         {
             return "Menu";
         }
-
+         
     }
 
 

@@ -15,6 +15,8 @@ namespace Randy.DomainCore
         public int RoleId { get; set; }
         public string Code { get; set; }
 
+        public int DepartmentId { get; set; }
+
         public List<Permission> Permissions { get; set; }
 
         public bool CheckRolePerssion(int authorityId)

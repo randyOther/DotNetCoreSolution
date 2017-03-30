@@ -7,6 +7,7 @@ using Randy.DomainCore;
 using Randy.DomainCore.DTO;
 using Randy.Infrastructure;
 using Randy.Api.Models;
+using Randy.Infrastructure.entities;
 
 namespace Randy.Api.Controllers
 {
@@ -45,6 +46,17 @@ namespace Randy.Api.Controllers
         public ReturnModel SignUp([FromBody]SignUpInput request)
         {
             return UserService.SignUp(request);
+        }
+
+        /// <summary>
+        /// User info list
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ReturnPagedModel<ls_user_info> GetUserInfos([FromBody]QueryPagedModel query)
+        {
+            return UserService.GetUserInfos(query);
         }
 
 

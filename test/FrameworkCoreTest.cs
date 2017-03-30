@@ -89,8 +89,8 @@ namespace Tests
 
             var all = repositories.GetAllList();
        
-            var all1 = repositories.GetAllByPaged(1,1);
-            var all2 = repositories.GetAllByPaged(2, 1);
+            //var all1 = repositories.GetAllByPaged(1,1);
+            //var all2 = repositories.GetAllByPaged(2, 1);
 
             var test = repositories.Insert(new Randy.FrameworkCore.reposiories.test { Name = "Jenny", Phone = "110" });
             //repositories.Commit();
