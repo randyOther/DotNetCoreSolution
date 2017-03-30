@@ -34,7 +34,7 @@ namespace Randy.Api.Controllers
         }
 
         /// <summary>
-        /// CreateRole
+        /// set role permission
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
@@ -44,6 +44,16 @@ namespace Randy.Api.Controllers
             return RoleService.SetRolePermission(input.roleIds, input.permissions);
         }
 
+        /// <summary>
+        /// set user role
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ReturnModel SetUserRole([FromBody]SetUserRoleRequest input)
+        {
+            return RoleService.SetUserRole(input.userIds, input.roles);
+        }
 
         /// <summary>
         /// CreateRole
@@ -79,6 +89,8 @@ namespace Randy.Api.Controllers
         {
             return RoleService.RemoveRole(role);
         }
+
+
 
 
         /// <summary>

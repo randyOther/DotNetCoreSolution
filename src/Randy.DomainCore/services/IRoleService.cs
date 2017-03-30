@@ -21,6 +21,8 @@ namespace Randy.DomainCore
 
         ReturnModel RemoveRole(Role role);
 
+        ReturnModel SetUserRole(List<int> userIds, List<Role> roles);
+
     }
 
 }

@@ -40,7 +40,7 @@ namespace Randy.Api
             {
                 c.SwaggerDoc("v1", new Info
                 {
-                    Version = "Version 1.0",
+                    Version = "1.0 alpha",  //beta
                     Title = "Core API",
                     Description = "A simple example ASP.NET Core Web API",
                     TermsOfService = "None",

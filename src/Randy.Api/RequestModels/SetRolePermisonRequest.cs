@@ -11,4 +11,14 @@ namespace Randy.Api.RequestModels
         public List<Permission> permissions { get; set; }
         public List<int> roleIds { get; set; } 
     }
+
+
+    public class SetUserRoleRequest
+    {
+        public List<Role> roles { get; set; }
+        public List<int> userIds { get; set; }
+    }
+
+
+    
 }

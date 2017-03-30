@@ -20,7 +20,7 @@ namespace Randy.DomainCore
 
         public IRepository<ls_role> RoleRepository { get; set; }
         public IRepository<ls_role_authority> RoleAuthorityRepository { get; set; }
-        //public IRepository<ls_authority> AuthorityRepository { get; set; }
+        public IRepository<ls_user_role> UserRoleRepository { get; set; }
         //public IEventBus EventBus { get; set; }
 
         public ReturnPagedModel<ls_role> GetRoles(QueryPagedModel query)
@@ -129,6 +129,37 @@ namespace Randy.DomainCore
 
             return result;
         }
+
+        public ReturnModel SetUserRole(List<int> userIds, List<Role> roles)
+        {
+            ReturnModel result = new ReturnModel();
+            if (userIds != null && userIds.Count > 0 && roles != null && roles.Count > 0)
+            {
+
+                foreach (var id in userIds)
+                {
+                    foreach (var role in roles)
+                    {
+                        var found = UserRoleRepository.Get(g => g.UserId == id && g.RoleId == role.RoleId);
+
+                        if (role == null)
+                        {
+                            UserRoleRepository.Insert(new ls_user_role
+                            {
+                                UserId = id,
+                                RoleId = role.RoleId,
+                                CreateDate = DateTime.Now
+                            });
+                        }
+                    }
+
+                }
+
+            }
+
+            return result;
+        }
+
     }
 
 }

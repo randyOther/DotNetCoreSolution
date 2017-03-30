@@ -13,5 +13,9 @@ namespace Randy.DomainCore
         public string Name { get; set; }
         public int AuthorityId { get; set; }
 
+        public string Status { get; set; }
+        public string PorityLevel { get; set; }
+        public string PermissionName { get; set; }
+
     }
 }
