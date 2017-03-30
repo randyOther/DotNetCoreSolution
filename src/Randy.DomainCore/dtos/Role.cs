@@ -17,21 +17,10 @@ namespace Randy.DomainCore
 
         public List<Permission> Permissions { get; set; }
 
-        public bool CheckRolePerssion(string permissionCode)
-        {
-            if (Permissions == null)
-                throw new BusinessException("Role: Permissions is null");
-
-            if (Permissions != null && Permissions.Any(s => s.Code == permissionCode))
-                return true;
-
-            return false;
-        }
-
         public bool CheckRolePerssion(int authorityId)
         {
             if (Permissions == null)
-                throw new BusinessException("Role: Permissions is null");
+                throw new BusinessException("Role: Permissions decline!");
 
             if (Permissions != null && Permissions.Any(s => s.AuthorityId == authorityId))
                 return true;

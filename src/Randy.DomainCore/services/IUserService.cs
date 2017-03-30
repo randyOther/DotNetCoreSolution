@@ -15,6 +15,7 @@ namespace Randy.DomainCore
         ReturnModel<User> Login(string userName, string password, string ip="");
         ReturnModel SignUp(SignUpInput input);
         ReturnModel SetUserInfo(UserInfo info);
+        ReturnModel<UserDetail> GetUserDetail(int userId);
     }
 
 }
