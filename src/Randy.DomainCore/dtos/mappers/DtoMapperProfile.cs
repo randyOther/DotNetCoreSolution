@@ -6,10 +6,8 @@ namespace Randy.DomainCore.dtos
 {
     public class DtoMapperProfile : Profile
     {
-        /// <summary>
-        /// dto mapping config
-        /// </summary>
-        protected override void Configure()
+
+        public DtoMapperProfile()
         {
             CreateMap<ls_user, User>();
             CreateMap<UserInfo, ls_user_info>();
@@ -17,7 +15,22 @@ namespace Randy.DomainCore.dtos
             CreateMap<ls_role, Role>();
             CreateMap<ls_authority, Permission>();
             CreateMap<ls_company, Company>();
-
         }
+
+        /// <summary>
+        /// dto mapping config
+        /// </summary>
+        //protected override void Configure()
+        //{
+        //    CreateMap<ls_user, User>();
+        //    CreateMap<UserInfo, ls_user_info>();
+        //    CreateMap<ls_user_info, UserInfo>();
+        //    CreateMap<ls_role, Role>();
+        //    CreateMap<ls_authority, Permission>();
+        //    CreateMap<ls_company, Company>();
+
+        //}
+
+        
     }
 }
