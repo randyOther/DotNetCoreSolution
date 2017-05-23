@@ -4,9 +4,9 @@ namespace Randy.Api
 {
     public static class AppMiddlerWareExtension
     {
-        public static IApplicationBuilder TestMiddlerWare(this IApplicationBuilder builder)
+        public static IApplicationBuilder JWTMiddlerWare(this IApplicationBuilder builder)
         {
-            return builder.UseMiddleware<MiddlerWares.TestMiddlerWare>();
+            return builder.UseMiddleware<MiddlerWares.JWTMiddlerWare>();
         }
     }
 }

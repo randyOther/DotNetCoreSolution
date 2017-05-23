@@ -77,7 +77,8 @@ namespace Randy.Api
             //use template swagger didnot work
             app.UseMvc();
             //custom 
-            //app.TestMiddlerWare();
+            
+            app.JWTMiddlerWare();
             app.UseSwagger();
             app.UseSwaggerUi(c =>
             {
