@@ -4,18 +4,18 @@ using System.Threading.Tasks;
 
 namespace Randy.Api.MiddlerWares
 {
-    public class JWTMiddlerWare
+    public class TestMiddlerWare
     {
         private readonly RequestDelegate nextdelegate;
 
-        public JWTMiddlerWare(RequestDelegate next)
+        public TestMiddlerWare(RequestDelegate next)
         {
             nextdelegate = next;
         }
 
         public async Task Invoke(HttpContext context)
         {
-            Console.WriteLine("randy test middler ware");
+            Console.WriteLine("Test middler ware");
             //context.Items.
             await nextdelegate.Invoke(context);
         }
