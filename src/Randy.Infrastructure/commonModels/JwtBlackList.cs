@@ -24,6 +24,13 @@ namespace Randy.Infrastructure
 
         public static string Remove(string key)
         {
+
+            if (key == null)
+            {
+                _blackrecord = new System.Collections.Concurrent.ConcurrentDictionary<string, string>();
+                return "all empty";
+            }
+
             string removeValue = null;
             if (_blackrecord.ContainsKey(key))
             {

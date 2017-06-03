@@ -14,8 +14,8 @@ namespace Randy.Api.Controllers
     /// <summary>
     /// User application service
     /// </summary>
-    //[Route("api/[controller]/[action]")]
-    public class UserController : ApiBaseController
+    [Route("[controller]/[action]")]
+    public class UserController : Controller
     {
 
         public IUserService UserService { get; set; }
@@ -32,8 +32,16 @@ namespace Randy.Api.Controllers
         [HttpPost]
         public ReturnModel<User> Login([FromBody]LoginRequest request)
         {
-            return UserService.Login(request.UserName, request.Password,HttpContext.Connection.RemoteIpAddress.ToString());
-   
+            var result = UserService.Login(request.UserName, request.Password, HttpContext.Connection.RemoteIpAddress.ToString());
+
+            if (result.Success)
+            {
+                result.ReturnMessage = JsonWebTokenSource.GetToken(false
+                                                                    , JsonSerialize.ToJson(result.RerutnModel.Detail?.Info)
+                                                                    , result.RerutnModel.Detail.Info.RealName);
+            }
+
+            return result;
         }
 
 
@@ -85,5 +93,5 @@ namespace Randy.Api.Controllers
 
     }
 
-   
+
 }

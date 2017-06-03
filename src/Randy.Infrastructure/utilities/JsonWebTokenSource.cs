@@ -1,6 +1,10 @@
 ﻿using System.Security.Cryptography;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.Extensions.PlatformAbstractions;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Security.Principal;
+using System;
 
 namespace Randy.Infrastructure
 {
@@ -35,7 +39,37 @@ namespace Randy.Infrastructure
         }
 
         public static JWTTokenOptions _tokenOptions { get; set; }
-             
+
+        public static string GetToken(bool isAdmin, string userInfoJson, string userName)
+        {
+            var handler = new JwtSecurityTokenHandler();
+            string jti = userName;  //todo: 应改为唯一标识,，用来标识 Token；
+            var claims = new[]
+            {
+                new Claim(ClaimTypes.NameIdentifier, userName),
+                new Claim("jti",jti,ClaimValueTypes.String), // jti，用来标识 token , 让其进入黑名单则可以失效token 不然只能等到到期时间
+                new Claim("userInfo",userInfoJson,ClaimValueTypes.String),
+            };
+            ClaimsIdentity identity = new ClaimsIdentity(new GenericIdentity(userName, "TokenAuth"), claims);
+
+            var expiresTime = DateTime.Now.AddMinutes(JsonWebTokenSource.ExpiresMinutes);
+
+            if (isAdmin)
+            {
+                expiresTime = DateTime.Now.AddDays(30);
+            }
+
+            var token = handler.CreateEncodedJwt(new SecurityTokenDescriptor
+            {
+                Issuer = JsonWebTokenSource._tokenOptions.Issuer, // 指定 Token 签发者，也就是这个签发服务器的名称
+                Audience = JsonWebTokenSource._tokenOptions.Audience, // 指定 Token 接收者
+                SigningCredentials = JsonWebTokenSource._tokenOptions.Credentials,
+                Subject = identity,
+                Expires = expiresTime
+            });
+
+            return "Bearer " + token;
+        }
     }
 
     /// <summary>
