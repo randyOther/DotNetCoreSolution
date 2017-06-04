@@ -12,6 +12,11 @@ using Randy.Api.MiddlerWares;
 using System.Reflection;
 using System.Runtime.Loader;
 using AutoMapper;
+using Randy.Infrastructure;
+using System.Security.Cryptography;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace Randy.Api
 {
@@ -32,15 +37,29 @@ namespace Randy.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
+
+            //Json web token
+            services.AddAuthorization(auth =>
+            {
+                auth.AddPolicy("Bearer", new AuthorizationPolicyBuilder()
+                    .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
+                    .RequireAuthenticatedUser()
+                    .AddRequirements(new ValidJtiRequirement())
+                    .Build());
+            });
+
+            // 注册验证要求的处理器，可通过这种方式对同一种要求添加多种验证
+            services.AddSingleton<IAuthorizationHandler, ValidJtiHandler>();
+
             // Add framework services.
             services.AddMvc();
 
-
+            //swagger ui
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info
                 {
-                    Version = "1.0 alpha",  //beta
+                    Version = "1.1 alpha",  //beta
                     Title = "Core API",
                     Description = "A simple example ASP.NET Core Web API",
                     TermsOfService = "None",
@@ -69,15 +88,30 @@ namespace Randy.Api
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
+            //automapping
             Mapper.Initialize(x =>
             {
                 x.AddProfile<DomainCore.dtos.DtoMapperProfile>();
             });
+
+            //set configuration
             Infrastructure.ConfigurationManager.SetConfig(Configuration);
-            //use template swagger didnot work
+
+            //json web token
+            app.UseJwtBearerAuthentication(new JwtBearerOptions
+            {
+                TokenValidationParameters = new TokenValidationParameters
+                {
+                    IssuerSigningKey = JsonWebTokenSource._tokenOptions.Key,
+                    ValidAudience = JsonWebTokenSource._tokenOptions.Audience, // 设置接收者必须一致
+                    ValidIssuer = JsonWebTokenSource._tokenOptions.Issuer, // 设置签发者必须一致
+                    ValidateLifetime = true,
+                }
+            });
+
             app.UseMvc();
-            //custom 
-            //app.TestMiddlerWare();
+           
+            app.TestMiddlerWare();
             app.UseSwagger();
             app.UseSwaggerUi(c =>
             {

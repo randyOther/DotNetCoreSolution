@@ -15,7 +15,8 @@ namespace Randy.Api.MiddlerWares
 
         public async Task Invoke(HttpContext context)
         {
-            Console.WriteLine("randy test middler ware");
+            Console.WriteLine("Test middler ware");
+            //context.Items.
             await nextdelegate.Invoke(context);
         }
     }
